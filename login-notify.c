@@ -115,7 +115,7 @@ if (oldlogexist != 0) {
 		for (x=(ln-thediff); x<ln;  x++) {
 			emailitems[x]=malloc(strlen(items[x])+1);
 			strcpy(emailitems[x], items[x]);
-			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s				  \"login\" %s", emailitems[x], emailaddy);
+			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s 			  \"login\" %s", emailitems[x], emailaddy);
 			system(embuff);
 			printf("diff: %s\n", embuff);
 		}
