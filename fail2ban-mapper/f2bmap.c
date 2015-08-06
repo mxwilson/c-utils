@@ -6,7 +6,7 @@
 #include<string.h>
 #include<fcntl.h>
 
-// Fail2banMapper - v.0.1. (c) Matthew Wilson. 2015. 
+// Fail2banMapper - v.0.1.1 (c) Matthew Wilson. 2015. 
 // Plots a world map of IPs banned today by Fail2ban.
 // Requires: Curl (to access ipinfo.io for Whois) and a map marker image.
 // Update OUTPUTMAP variable to change location of saved map html files.
@@ -93,6 +93,11 @@ for (a=0; a<x; a++) {
 		printf("%d: %s %s\n", cnt, pars_T[cnt], pars_IP[cnt]);
 		cnt++;
 	}
+}
+
+if (cnt == 0) {
+	printf("no matching items in log file - ex:\'Today\'\n");
+	exit(1);
 }
 
 int b;
