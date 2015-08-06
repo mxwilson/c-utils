@@ -6,7 +6,7 @@
 #include<string.h>
 #include<fcntl.h>
 
-// Fail2banMapper - v.0.1.1 (c) Matthew Wilson. 2015. 
+// Fail2banMapper - v.0.1.2 (c) Matthew Wilson. 2015. 
 // Plots a world map of IPs banned today by Fail2ban.
 // Requires: Curl (to access ipinfo.io for Whois) and a map marker image.
 // Update OUTPUTMAP variable to change location of saved map html files.
@@ -49,20 +49,29 @@ snprintf(OUTPUTMAP, sizeof OUTPUTMAP, "f2bmap.%d.%d.%d.htm", Year, Month, Today)
 // program depends on curling ipinfo.io for whois info
 
 if (access("/usr/bin/curl", F_OK) == -1) {
-	printf("Curl must be installed to run\n");
+	printf("Error: Curl must be installed to run\n");
 	exit(1);
 } 
 
-fp=fopen(THELOGFILE, "r");
+int res=0;
+res = system("curl -s ipinfo.io > /dev/null 2>&1");
 
-if (fp == NULL) {
-	printf("error: unable to read log file\n");
+if (res != 0) {
+	printf("Error: Curl unable to connect to network\n");
 	exit(1);
 }
 
 // read lines from fail2ban log
 
+fp=fopen(THELOGFILE, "r");
+
+if (fp == NULL) {
+	printf("Error: unable to read log file: %s\n", THELOGFILE);
+	exit(1);
+}
+
 int x=0;
+
 while (fgets(line, sizeof (line)-1, fp) != NULL) {
 	unparLin[x]=malloc(strlen(line)+1);	
 	strcpy(unparLin[x], line);
@@ -83,8 +92,9 @@ for (a=0; a<x; a++) {
 	// get the time from line
 	sscanf(inc_T, "%d-%d-%d", &incyear, &incmonth, &incday);	
 
-	// if the incoming day = Today, and inc_S = Ban, then list
-	
+	// if the incoming day = Today, and inc_S = Ban, then list. 
+	// change line below to process all items: if strcmp(inc_S, kw) == 0) {
+ 	
 	if ((incday==Today) && strcmp(inc_S, kw) == 0) {
 		pars_T[cnt]=malloc(strlen(inc_T)+1);
 		strcpy(pars_T[cnt], inc_T);	
@@ -129,7 +139,7 @@ char lat[30];
 char llong[30];
 
 for (b=0; b<cnt; b++) {
-	sscanf(pars_LOC[b], "%[^','], %s", lat, llong);
+	sscanf(pars_LOC[b], "%[^','], %s", lat, llong); 
 	pars_LAT[b]=malloc(strlen(lat)+1);
 	strcpy(pars_LAT[b], lat);	
 	pars_LONG[b]=malloc(strlen(llong)+1);  
