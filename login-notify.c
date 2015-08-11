@@ -122,7 +122,7 @@ if (oldlogexist != 0) {
 			strcpy(emailitems[x], items[x]);
 			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"login\" %s", emailitems[x], emailaddy);
 			system(embuff);
-			printf("diff: %s\n", embuff);
+			//printf("diff: %s\n", embuff);
 		}
 		// delete old and create new log file
 		if (access(comparelogfile, F_OK|W_OK) != -1) {
