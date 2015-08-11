@@ -7,7 +7,7 @@
 #include<string.h>
 #include<fcntl.h>
 
-// login-notify.c - v.0.1. (c) Matthew Wilson. 2015. 
+// login-notify.c - v.0.1.2 (c) Matthew Wilson. 2015. 
 // SSH log-in notifier. Uses SSMTP/mailx to send email upon new login.
 // Program is run by cron job. 
 // License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -19,7 +19,8 @@ time_t logintime_raw;
 char tempbuf[99];
 int linesold=0;
 int ln=0;
-char* thelogfile="./notlog.log"; // location of compare log file 
+char* wtmplogfile="/var/log/wtmp"; // location of wtmp log file
+char* comparelogfile="./notlog.log"; // location of compare log file 
 char* emailaddy="user@email.com"; // email address for notifications
 
 // going to filter out all results starting with tty in the wtmp,
@@ -30,21 +31,26 @@ char* emailaddy="user@email.com"; // email address for notifications
 // delete old log file and re-create including new lines.
 
 char* TTYcheck=NULL;
-FILE *fd;
+FILE *LOGfp;
 FILE *pfo;
 int oldlogexist=0;
 char buff[999];
 char embuff[999];
-char* items[9999];
-char* emailitems[9999];
+char* items[2048];
+char* emailitems[2048];
 
-if (access(thelogfile, F_OK|W_OK) == 0) {
+if (access(comparelogfile, F_OK|W_OK) == 0) {
 	oldlogexist=1;
 }
 
-fd = fopen("/var/log/wtmp", "r");
+LOGfp = fopen(wtmplogfile, "r");
+
+if (LOGfp == NULL) {
+	printf("Unable to open wtmp log.\n");
+	exit(1);
+}
 	
-while (fread(&ii, sizeof ii, 1, fd) !=0) {
+while (fread(&ii, sizeof ii, 1, LOGfp) !=0) {
 	if (ii.ut_type==7) {
         	// look for logins other than tty
 		TTYcheck = strstr(ii.ut_line, "tty");
@@ -55,7 +61,7 @@ while (fread(&ii, sizeof ii, 1, fd) !=0) {
                         tempbuf[strlen(tempbuf)-1]='\0';
 			
 			if (oldlogexist != 1) {
-				pfo=fopen(thelogfile, "a+");
+				pfo=fopen(comparelogfile, "a+");
 			}                       
 
 			if (strlen(ii.ut_host) > 4 )  {
@@ -78,7 +84,7 @@ while (fread(&ii, sizeof ii, 1, fd) !=0) {
 	}
 }
 
-fclose(fd);
+fclose(LOGfp);
 
 if (oldlogexist != 1) {
 	fclose(pfo);
@@ -90,7 +96,7 @@ if (oldlogexist != 0) {
 	int c;
 	FILE *fp0;
 
-	if (!(fp0=fopen(thelogfile, "r"))) {
+	if (!(fp0=fopen(comparelogfile, "r"))) {
 		printf("line count file error\n");
 		exit(1);
 	}
@@ -120,10 +126,10 @@ if (oldlogexist != 0) {
 			printf("diff: %s\n", embuff);
 		}
 		// delete old and create new log file
-		if (access(thelogfile, F_OK|W_OK) != -1) {
-			remove(thelogfile);
+		if (access(comparelogfile, F_OK|W_OK) != -1) {
+			remove(comparelogfile);
 			FILE* pfoN;	
-			pfoN=fopen(thelogfile, "a+");
+			pfoN=fopen(comparelogfile, "a+");
 	        	
 			for (x=ln; x-- > 0;) {				
 				fprintf(pfoN, "%s\n", items[x]);
