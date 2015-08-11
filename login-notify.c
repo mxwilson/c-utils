@@ -65,8 +65,7 @@ while (fread(&ii, sizeof ii, 1, LOGfp) !=0) {
 			}                       
 
 			if (strlen(ii.ut_host) > 4 )  {
-                       		snprintf(buff, sizeof buff, "%s %s %s %s", 
-				  ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
+				snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
 				items[ln]=malloc(strlen(buff)+1);
 				strcpy(items[ln], buff);
 				//printf("%d: %s\n", ln, items[ln]);	
