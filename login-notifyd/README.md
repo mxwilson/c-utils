@@ -11,8 +11,8 @@ Login-notifyd - A simple Systemd daemon that detects SSH logins and e-mails noti
 
 3. Update login-notifyd.service file and change ExecStart line to reflect location of executable.
 	> move service file to /etc/systemd/system/ and activate:
-		> $ systemctl enable login-notifyd.service
-		> $ systemctl start login-notifyd.service
+	> $ systemctl enable login-notifyd.service
+	> $ systemctl start login-notifyd.service
 
 ## License
 Copyright 2015 Matthew Wilson. 
