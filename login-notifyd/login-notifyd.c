@@ -1,6 +1,5 @@
 // login-notifyd.c - v.0.1 (c) Matthew Wilson. 2015. 
-// SSH log-in notifier daemon. Uses SSMTP/mailx to send email upon new login.
-// Install included Systemd service file to run.  
+// SSH log-in notifier daemon. Uses SSMTP/mailx to send e-mail upon new login.
 // License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 // No warranty. Software provided as is.
 
@@ -17,7 +16,7 @@
 #define LOCK_FILE "/run/lock/login-notifyd.lock" // lock file location
 #define SLEEPYTIME 30 // time of heartbeat in seconds
 
-char* emailaddy="username@email.com"; // email address for notifications
+char* emailaddy="username@email.com"; // e-mail address for notifications
 char* wtmplogfile="/var/log/wtmp"; // location of wtmp log file
 char* comparelogfile="/var/log/login-notifyd.log"; // compare log file 
 char* errlog="/var/log/login-notifyd-err.log"; // program log file
@@ -185,6 +184,11 @@ main (int argc, char* argv[]) {
 
 if (argc > 1) {
 	printf("Too many arguments. Program exit.\n");
+	exit(1);
+}
+
+if (access("/usr/sbin/ssmtp", F_OK) == -1) {
+	printf("Error: ssmtp not installed at: /usr/sbin/ssmtp\n");
 	exit(1);
 }
 
