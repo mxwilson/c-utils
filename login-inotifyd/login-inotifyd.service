@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH Login iNotify Daemon
+After=default.target
+
+[Service]
+ExecStart=/usr/bin/login-inotifyd
+Type=forking
+PIDFile=/var/run/login-inotifyd.pid
+TimeoutStopSec=0
+
+[Install]
+WantedBy=multi-user.target
+
+
