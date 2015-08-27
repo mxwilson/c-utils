@@ -1,6 +1,6 @@
 ## Synopsis
 
-Login-inotifyd - A daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. Similar to prev programs except this utilizes inotify and e-mails notifications immediately without the need for a cron job. 
+Login-inotifyd - A daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. Similar to prev programs except this utilizes the inotify API and e-mails notifications immediately without the need for a cron job. 
 
 ## Installation
 
@@ -11,14 +11,16 @@ Login-inotifyd - A daemon that detects SSH logins and e-mails notifications usin
 3. $ make login-inotifyd
 	- place executable in location of your choice. ie: /usr/bin/login-inotifyd
 
-4. Update login-inotifyd.service file and change ExecStart line to reflect location of executable.
+4. Update included /etc/login-inotifyd.service file and change ExecStart line to reflect location of executable.
 	- move service file to /etc/systemd/system/ and activate:
 	- $ systemctl enable login-inotifyd.service
 	- $ systemctl start login-inotifyd.service
 
 	OR:
 
-	- If using Upstart, install login-inotifyd.conf file in /etc/init/ and configure as necessary. 
+	- If using SysVinit, install included /etc/login-inotifyd file in /etc/init.d/ and configure as necessary. 
+	- $ update-rc.d login-inotifyd defaults
+	- $ service login-inotifyd start
 
 ## License
 Copyright 2015 Matthew Wilson. 

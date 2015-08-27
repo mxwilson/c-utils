@@ -1,0 +1,29 @@
+#! /bin/sh
+# /etc/init.d/login-inotifyd
+
+### BEGIN INIT INFO
+# Provides: login-inotifyd
+# Required-Start: $all
+# Required-Stop: $all
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Login iNotifyD
+# Description: SSH Login iNotify Daemon
+### END INIT INFO
+
+case "$1" in
+	start)
+	echo "starting login-inotifyd"
+	/usr/bin/login-inotifyd
+	;;
+	stop)
+	echo "stopping login-inotifyd"
+	pkill i3
+	;;
+*)
+	echo "usage: /etc/init.d/login-inotifyd {start|stop}"
+	exit 1
+	;;
+esac
+
+exit 0
