@@ -1,8 +1,10 @@
 /*
-WeatherOnConsole v 0.1 
+WeatherOnConsole v 0.1.2
 woc is an applicaton that displays current and upcoming weather conditions with data provided by Environment Canada from weather.gc.ca. Change the variable below to select the city of your choice.   
 
 libxml2, libxml2-devel, libcurl and libcurl-devel are required to compile.
+
+mailx and ssmpt must be installed to use the e-mail function (woc -e).
 
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 No warranty. Software provided as is.
@@ -13,6 +15,7 @@ gcc woc.c -o woc -lcurl -lxml2 -lm -I/usr/include/libxml2
 */
 
 #include<stdio.h>
+#include<getopt.h>
 #include<unistd.h>
 #include<stdlib.h>
 #include<string.h>
@@ -31,9 +34,14 @@ char* thesite = "http://weather.gc.ca/rss/city/qc-147_e.xml";
 // http://weather.gc.ca/rss/city/qc-147_e.xml - Montreal
 // http://weather.gc.ca/rss/city/ns-19_e.xml - Halifax
 
+// change to your e-mail address for notifications
+char* emailaddy="name@address.com";
+
 char* savefile = "./thefile.xml";
 int x=0;
 char* theitems[100];
+int leftover=0;
+int e=0;
 
 // function for saving a downloaded page
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE* stream) {
@@ -161,29 +169,125 @@ xmlFreeDoc(doc);
 
 int a;
 
-// now print items or possibly do something else with them
+// now print items or e-mail them
 
-for (a=0; a<x; a++) {
-	printf("%d: %s\n", a, theitems[a]);
+if (e == 1) {
+	emailer();
 }
 
-// delete xml file after use 
+else {
+	for (a=0; a<x; a++) {
+		printf("%d: %s\n", a, theitems[a]);
+	}
+}
+
+// delete xml file after use and end program
 
 remove(savefile);
-
+exit(0);
 }
 
-main(int argc, char* argv[]) {
+// e-mail function
 
-if (argc > 1) {
-	printf("err. plz run wituout args\n");
-	exit(1);	
+emailer() {
+	if (access("/usr/sbin/ssmtp", F_OK) == -1) {
+		printf("error: ssmpt must be installed to e-mail\n");	
+	}
+
+// concat all items into one string for use in e-mail
+
+unsigned int stringsize=0;
+char concatweather[666];
+int c;
+
+for (c=0; c<x; c++) {
+	stringsize += strlen(theitems[c])+1;
 }
-else {
+
+char* str3 = (char *) malloc(1+sizeof(char*) * (stringsize));
+
+// for concating, good idea to initialize the string array with '\0' to
+// prevent junk characters at beginning of string
+
+str3[0] = '\0';
+
+for (c=0; c<x; c++) {
+	strcat(str3, theitems[c]);
+
+	if (c < (x-1)) {
+		strcat(str3, " \n");
+	}
+}
+
+strcpy(concatweather, str3);
+
+// now actually email
+
+char embuff[666];
+snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"weather!\" %s", concatweather, emailaddy);
+printf("e-mailed!\n");
+system(embuff);
+}
+
+static int flag_help;
+
+static struct option const long_options[] = 
+{
+	{"e", no_argument, 0, 'e'}, 
+    	{"help", no_argument, &flag_help, 1}, 
+   	{0, 0, 0, 0}			
+};
+
+usage() {
+printf("usage: woc [-e (e-mails results)]'\n");
+exit(1);
+}
+
+main (int argc, char* argv[]) {
+int optc;
+int index;
+
+while ((optc = getopt_long (argc, argv, "e", long_options, (int *) 0)) !=EOF) {
+	switch (optc) {
+		case 0:
+	  	  break; 
+		case 'e':
+	          e=1;
+		  break;
+	  	case '?':
+	  	  usage();
+		  break;
+	 	default:	
+	  	  usage();
+		  break;
+	}
+}
+
+if (flag_help) {
+	printf("weatheronconsole!\n");
+	usage();
+}
+
+if (argc == 1) {
 	curl_func();
 }
 
-exit(0);
+else if (argc > 1) {
+	for (index=optind; index<argc; index++) {
+		;
+	}
 
+	argc -= optind;
+	argv += optind;
+	leftover=index-optind;
+
+	if (leftover >= 1) {
+		usage();
+	}
+
+	if (leftover == 0) {
+		curl_func();
+	}
 }
 
+}
