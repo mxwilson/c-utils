@@ -1,6 +1,6 @@
 ## Synopsis
 
-Login-notifyd - A simple daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. 
+Login-notifyd - A daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. 
 
 ## Installation
 

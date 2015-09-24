@@ -1,6 +1,6 @@
 // <login-inotifyd.c>
-// Copyright 2015 Matthew Wilson. 
-// License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+// v 0.1.3. Copyright 2015 Matthew Wilson. 
+// License GPLv3+: GNU GPL version 3 or later: http://gnu.org/licenses/gpl.html
 // No warranty. Software provided as is.
 
 #include<stdio.h>
@@ -46,19 +46,19 @@ if (LOGfp == NULL) {
         exit(1);
 }
 
-while (fread(&ii, sizeof ii, 1, LOGfp) !=0) {
-        if (ii.ut_type==7) {
+while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
+        if (ii.ut_type == 7) {
                 // look for logins other than tty
                 TTYcheck = strstr(ii.ut_line, "tty");
 
                 if (TTYcheck != ii.ut_line) {
                         logintime_raw=ii.ut_time;
                         strcpy(tempbuf, ctime(&logintime_raw));
-                        tempbuf[strlen(tempbuf)-1]='\0';
+                        tempbuf[strlen(tempbuf) - 1] = '\0';
 
  			if (strlen(ii.ut_host) > 4 )  {
                         	snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
-                                items[ln]=malloc(strlen(buff)+1);
+                                items[ln]=malloc(strlen(buff) + 1);
                                 strcpy(items[ln], buff);
 				ln++;
 			}
@@ -75,10 +75,10 @@ if (ln == 0) {
 
 // get most recent item in wtmp and assign to itemtoemail
 else {
-	cntrr=(ln-1);
-	itemtoemail=malloc(strlen(items[cntrr])+1); 
+	cntrr=(ln - 1);
+	itemtoemail=malloc(strlen(items[cntrr]) + 1); 
 	strcpy(itemtoemail, items[cntrr]);
-	items[0]='\0';
+	items[0] = '\0';
 	ln=0;
 }
 
@@ -172,7 +172,7 @@ char timebuf[33];
 time_t thetime;
 thetime = time(NULL);
 strcpy(timebuf, ctime(&thetime));
-timebuf[strlen(timebuf)-1]='\0';
+timebuf[strlen(timebuf) - 1] = '\0';
 
 FILE* errlogfp;
 errlogfp=fopen(errlog, "a");
