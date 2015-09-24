@@ -1,6 +1,6 @@
-/* CTASK v0.1 */
+// CTASK v0.1 
 // ctask is a simple task manager using a flat file db. 
-// Inspired by CD's todo at <https://github.com/ddddddeon/todo>
+// Inspired by CD's 'todo' at <https://github.com/ddddddeon/todo>
 // License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 // No warranty. Software provided as is.
 // Copyright Matthew Wilson, 2015.
@@ -70,9 +70,8 @@ for (x=0; x<linecount; x++) {
         else if ((atoi(item3[x]) == 3)) {
                 printf(ANSI_GREEN "%s (P3)" ANSI_RESET, item1[x]);
         }
-		printf(" | added: %s\n", timeadded[x]);
-		printf("     %s\n\n", item2[x]);
-
+	printf(" | added: %s\n", timeadded[x]);
+	printf("     %s\n\n", item2[x]);
 }
 
 fclose(fp);
@@ -172,7 +171,7 @@ snprintf(timeline, sizeof timeline, "%d-%d-%d-%dh-%02dm", info->tm_mday, mon, ye
 // now write to db
 
 if (!(fp=fopen(DBFILE, "a"))) {
-	printf("output file error\n");
+	printf("DB file write error :(\n");
 	exit(1);
 }
 
@@ -270,7 +269,7 @@ int c;
 // create db file if not exist.
 
 if (access(DBFILE, F_OK|W_OK) == -1) {
-	creat(DBFILE, S_IRWXU);
+	creat(DBFILE, S_IRUSR|S_IWUSR);
 	printf("No DB file. Creating one :)\n");
 
 	if (argcc == 0) {
