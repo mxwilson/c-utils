@@ -8,7 +8,7 @@ Program uses the Jansson library from http://www.digip.org/jansson/
 
 To compile: gcc il.c -o il -ljansson 
 
-To run: ./il <username>
+To run: ./il username
 
 Version 0.1 will only download the first page of visible images. Next version will download all.
 
