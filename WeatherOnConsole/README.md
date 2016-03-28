@@ -6,11 +6,11 @@ woc is a terminal application that displays the weather forecast of many Canadia
 
 ## Options
  
-woc [city name]
+woc [ city name ]
 
 woc -l (list cities)
 
-woc -d [city name] (set default)
+woc -d [ city name ] (set default)
 
 ## Cities in db
 Victoria, Vancouver, Kelowna, Kamloops, Prince Rupert, Edmondton, Calgary, Lethbridge, Uranium City, Saskatoon, Regina, Flin Flon, Brandon, Winnipeg, Thunder Bay, Sudbury, Ottawa, Toronto, Montreal, Sherbrooke, Quebec City, Fredericton, Moncton, Saint John, Charlottetown, Halifax, Sydney, Yarmouth, St. John's, Labrador City, Whitehorse, Yellowknife, Iqaluit.
