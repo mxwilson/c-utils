@@ -7,7 +7,9 @@ woc is a terminal application that displays the weather forecast of many Canadia
 ## Options
  
 woc [city name]
+
 woc -l (list cities)
+
 woc -d [city name] (set default)
 
 ## Cities in db
