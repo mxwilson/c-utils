@@ -73,6 +73,14 @@ curl_easy_setopt(thehandle, CURLOPT_WRITEDATA, f);
 res = curl_easy_perform(thehandle);
 fclose(f);
 
+// now check for error
+
+if (res != CURLE_OK) {
+	remove(savefile);
+	printf("curl error\n");
+	exit(1);
+}
+
 // end the curl section
 
 curl_global_cleanup();
