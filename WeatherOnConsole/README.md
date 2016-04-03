@@ -1,8 +1,8 @@
-# WeatherOnConsole (woc) v 0.2
+# WeatherOnConsole (woc) v 0.3
 
 ## Synopsis
 
-woc is a terminal application that displays the weather forecast of many Canadian cities with data provided by Environment Canada. 
+woc is a terminal application that displays the weather forecast of 807 Canadian towns and cities with data provided by Environment Canada. 
 
 ## Options
  
@@ -12,8 +12,15 @@ woc -l \(list cities\)
 
 woc -d \[city name\] \(set default\)
 
-## Cities in db
-Victoria, Vancouver, Kelowna, Kamloops, Prince Rupert, Edmondton, Calgary, Lethbridge, Uranium City, Saskatoon, Regina, Flin Flon, Brandon, Winnipeg, Thunder Bay, Sudbury, Ottawa, Toronto, Montreal, Sherbrooke, Quebec City, Fredericton, Moncton, Saint John, Charlottetown, Halifax, Sydney, Yarmouth, St. John's, Labrador City, Whitehorse, Yellowknife, Iqaluit.
+## Examples
+$./woc -l | grep otta
+ottawa (kanata - orleans)
+ottawa (richmond - metcalfe) 
+$./woc -d "ottawa (kanata - orleans)"
+ 
+## Files
+.wocdb - comma-separated database file read by woc. Run woc-util.sh to generate an up-to-date list. 		
+.wocdef - default city config file created after running woc -d \[city name\].
 
 ## Requirements
 

@@ -1,5 +1,5 @@
 /*
-WeatherOnConsole (woc) v 0.2
+WeatherOnConsole (woc) v 0.3
 Display the weather forecast of Canadian cities.
 
 libxml2, libxml2-dev, libcurl3 and libcurl3-dev are required to compile.
@@ -23,10 +23,12 @@ Copyright Matthew Wilson, 2015-16.
 #include<libxml/tree.h>
 #include<libxml/xmlmemory.h>
 
-char* conf_file = "./.woc"; // default city conf file
+char* db_file = "./.wocdb"; // db file of cities
+char* conf_file = "./.wocdef"; // default city conf file
 char* savefile = "./thefile.xml"; // downloaded xml file
-char* version ="0.2";
+char* version ="0.3";
 int set_default_city(char citytopass[20]);
+int parseDoc();
 int x=0;
 char* theitems[100];
 int leftover=0;
@@ -101,7 +103,7 @@ cur = cur->xmlChildrenNode;
 while (cur != NULL) {
         if ((!xmlStrcmp(cur->name, (const xmlChar *)"title"))) {
                 key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-                theitems[x]=malloc(strlen(key)+1);
+                theitems[x]=malloc(strlen(key) + 1);
                 strcpy(theitems[x], key);
                 xmlFree(key);
         }
@@ -112,7 +114,7 @@ x++;
 
 // parseDoc function is the xmlreader
 
-parseDoc() {
+int parseDoc() {
 xmlDocPtr doc;
 xmlNodePtr cur;
 
@@ -141,8 +143,7 @@ if (xmlStrcmp(cur->name, (const xmlChar *) "feed")) {
         exit(1);
 }
 
-// then pick out each sub-element you want, and zero in on each inner element
-// using parseStory (above)
+// then pick out each sub-element you want, and zero in on each inner element using parseStory (above)
 
 cur = cur->xmlChildrenNode;
 
@@ -160,7 +161,7 @@ int a;
 
 // now print the weather items
  
-for (a=0; a<x; a++) {
+for (a = 0; a < x; a++) {
 	printf("%d: %s\n", a, theitems[a]);
 }
 
@@ -173,66 +174,48 @@ exit(0);
 // function for listing cities and matching city on command line
 
 int tester(char argvcity[40]) {
+FILE* f;
+char line[999];
+int lncnt=0;
+char* lineitems[1000];
+char* parsurl[1000];
+char* parscityNC[1000];
+int b;
 
-// struct of pairs[x].city and pairs[x].url
+// check for dbfile before doing anything
 
-struct citystruct {
-	char city[20];
-	char url[80];
-};
+f = fopen(db_file, "r");
 
-struct citystruct pairs[33] = {
-	{"victoria", "http://weather.gc.ca/rss/city/bc-85_e.xml"},
-	{"vancouver", "http://weather.gc.ca/rss/city/bc-74_e.xml"},
-	{"kelowna", "http://weather.gc.ca/rss/city/bc-48_e.xml"},
-	{"kamloops", "http://weather.gc.ca/rss/city/bc-45_e.xml"},
-	{"prince rupert", "http://weather.gc.ca/rss/city/bc-57_e.xml"},
-	{"edmondton", "http://weather.gc.ca/rss/city/ab-50_e.xml"},
-	{"calgary", "http://weather.gc.ca/rss/city/ab-52_e.xml"},
-	{"lethbridge", "http://weather.gc.ca/rss/city/ab-30_e.xml"},
-	{"uranium city", "http://weather.gc.ca/rss/city/sk-44_e.xml"},
-	{"saskatoon", "http://weather.gc.ca/rss/city/sk-40_e.xml"},
-	{"regina", "http://weather.gc.ca/rss/city/sk-32_e.xml"},
-	{"flin flon", "http://weather.gc.ca/rss/city/mb-60_e.xml"},
-	{"brandon", "http://weather.gc.ca/rss/city/mb-52_e.xml"}, 
-	{"winnipeg", "http://weather.gc.ca/rss/city/mb-38_e.xml"},
-	{"thunder bay", "http://weather.gc.ca/rss/city/on-100_e.xml"},
-	{"sudbury", "http://weather.gc.ca/rss/city/on-40_e.xml"},
-	{"ottawa", "http://weather.gc.ca/rss/city/on-118_e.xml"},
-	{"toronto", "http://weather.gc.ca/rss/city/on-143_e.xml"},
-	{"montreal", "http://weather.gc.ca/rss/city/qc-147_e.xml"},
-	{"sherbrooke", "http://weather.gc.ca/rss/city/qc-136_e.xml"},	
-	{"quebec city", "http://weather.gc.ca/rss/city/qc-133_e.xml"},
-	{"fredericton", "http://weather.gc.ca/rss/city/nb-29_e.xml"},
-	{"moncton", "http://weather.gc.ca/rss/city/nb-36_e.xml"},
-	{"saint john", "http://weather.gc.ca/rss/city/nb-23_e.xml"},
-	{"charlottetown", "http://weather.gc.ca/rss/city/pe-5_e.xml"},
-	{"halifax", "http://weather.gc.ca/rss/city/ns-19_e.xml"},
-	{"sydney", "http://weather.gc.ca/rss/city/ns-31_e.xml"},
-	{"yarmouth", "http://weather.gc.ca/rss/city/ns-29_e.xml"},
-	{"st. john's", "http://weather.gc.ca/rss/city/nl-24_e.xml"},
-	{"labrador city", "http://weather.gc.ca/rss/city/nl-20_e.xml"},
-	{"whitehorse", "http://weather.gc.ca/rss/city/yt-16_e.xml"},
-	{"yellowknife", "http://weather.gc.ca/rss/city/nt-24_e.xml"},
-	{"iqaluit", "http://weather.gc.ca/rss/city/nu-21_e.xml"}
-};
+if (f == NULL) {
+	printf("error reading db file: %s\n", db_file);
+	exit(1);
+}
 
-int q;
+// read lines from db file. tokenize. then remove trailing space from string
 
-// -l flag list function
+while (fgets(line, sizeof(line) - 1, f) != NULL) {
+	lineitems[lncnt] = malloc(strlen(line) + 1);
+	strcpy(lineitems[lncnt], line);
+	lineitems[lncnt][strcspn(lineitems[lncnt], "\n")] = 0;	
+	
+	parsurl[lncnt]=strtok(lineitems[lncnt], ",");
+	parscityNC[lncnt]=strtok(NULL, ",");
+	
+	parscityNC[lncnt][strlen(parscityNC[lncnt]) - 1] = '\0';
+	lncnt++;
+}
+	
+fclose(f);
+
+// list if -l flag is set
 
 if (l == 1) {
-	printf("list of cities: ");
-	for (q = 0; q < sizeof(pairs) / sizeof(pairs[0]); q++) {
-		printf("%s", pairs[q].city);
-		
-		if (q < (sizeof(pairs) / sizeof(pairs[0])) - 1) {
-			printf(", ");
-		}
+	for (b = 0; b < lncnt; b++) {
+		printf("%s\n", parscityNC[b]);
 	}
-	printf("\n");
+	printf("\nNum of cities: %d\n", lncnt);
 	exit(0);
-}
+}	
 
 // see if there is a match
 
@@ -247,27 +230,25 @@ for (a = 0; newstring[a]; a++) {
 	newstring[a] = tolower(newstring[a]);
 } 
 
-// Now check for matching string and proceed to curl function
+// now check for matching string and proceed to curl function
 
 int c;
 char citytopass[20];
 char urltopass[80];
 
-// if matching will download. will set default also provided match is made
-
-for (c = 0; c < sizeof(pairs) / sizeof(pairs[0]); c++) {
-	if (strcmp(newstring, pairs[c].city) == 0) {
-		strcpy(citytopass, pairs[c].city);
-		strcpy(urltopass, pairs[c].url);
+for (c = 0; c < lncnt; c++) {
+	if (strcmp(newstring, parscityNC[c]) == 0) {
+		strcpy(citytopass, parscityNC[c]);
+		strcpy(urltopass, parsurl[c]);
 		
-		// setting default		
+		// if setting default		
 		if (d == 1) {
-			set_default_city(citytopass);			
+			set_default_city(citytopass);
 		}	
 		
 		// proceed to curl function to download xml file
 		curl_func(citytopass, urltopass);
-		}
+	}
 }
 
 // otherwise no matching city/string
@@ -304,8 +285,9 @@ char incomingline[150];
 // check if exist
 
 if (access(conf_file, F_OK) == -1) {
-	printf("default city config file not exist\n");
-	printf("run: woc -d [city name] to create\n");
+	printf("default city config file not exist: %s\n", conf_file);
+	printf("run: woc -d [city name] to create ");
+	printf("or woc -l to list\n");
 	exit(1);
 }
 
@@ -318,7 +300,7 @@ if (! (fp = fopen(conf_file, "r")) ) {
 
 else {
 	while (x != 1) { 
-		if (fgets(incomingline, sizeof (incomingline)-1, fp) != NULL) {
+		if (fgets(incomingline, sizeof(incomingline) - 1, fp) != NULL) {
 			strcpy(argvcity, incomingline);		
 			// key to dealing with newline from file
 			argvcity[strcspn(argvcity, "\n")] = 0;

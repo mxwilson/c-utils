@@ -1,0 +1,807 @@
+http://weather.gc.ca/rss/city/ab-10_e.xml,athabasca 
+http://weather.gc.ca/rss/city/ab-11_e.xml,okotoks 
+http://weather.gc.ca/rss/city/ab-12_e.xml,airdrie 
+http://weather.gc.ca/rss/city/ab-14_e.xml,hinton 
+http://weather.gc.ca/rss/city/ab-15_e.xml,lloydminster 
+http://weather.gc.ca/rss/city/ab-16_e.xml,rocky mountain house 
+http://weather.gc.ca/rss/city/ab-17_e.xml,crowsnest 
+http://weather.gc.ca/rss/city/ab-18_e.xml,camrose 
+http://weather.gc.ca/rss/city/ab-19_e.xml,milk river 
+http://weather.gc.ca/rss/city/ab-1_e.xml,cochrane 
+http://weather.gc.ca/rss/city/ab-20_e.xml,fort mcmurray 
+http://weather.gc.ca/rss/city/ab-21_e.xml,rainbow lake 
+http://weather.gc.ca/rss/city/ab-22_e.xml,stony plain 
+http://weather.gc.ca/rss/city/ab-23_e.xml,cold lake 
+http://weather.gc.ca/rss/city/ab-24_e.xml,high level 
+http://weather.gc.ca/rss/city/ab-25_e.xml,peace river 
+http://weather.gc.ca/rss/city/ab-26_e.xml,vegreville 
+http://weather.gc.ca/rss/city/ab-27_e.xml,vauxhall 
+http://weather.gc.ca/rss/city/ab-28_e.xml,fort chipewyan 
+http://weather.gc.ca/rss/city/ab-29_e.xml,red deer 
+http://weather.gc.ca/rss/city/ab-2_e.xml,barrhead 
+http://weather.gc.ca/rss/city/ab-30_e.xml,lethbridge 
+http://weather.gc.ca/rss/city/ab-31_e.xml,grande prairie 
+http://weather.gc.ca/rss/city/ab-32_e.xml,lac la biche 
+http://weather.gc.ca/rss/city/ab-33_e.xml,mildred lake 
+http://weather.gc.ca/rss/city/ab-34_e.xml,kananaskis (nakiska ridgetop) 
+http://weather.gc.ca/rss/city/ab-35_e.xml,onefour 
+http://weather.gc.ca/rss/city/ab-36_e.xml,breton 
+http://weather.gc.ca/rss/city/ab-37_e.xml,hendrickson creek 
+http://weather.gc.ca/rss/city/ab-38_e.xml,nordegg 
+http://weather.gc.ca/rss/city/ab-39_e.xml,lacombe 
+http://weather.gc.ca/rss/city/ab-3_e.xml,canmore 
+http://weather.gc.ca/rss/city/ab-40_e.xml,red earth creek 
+http://weather.gc.ca/rss/city/ab-41_e.xml,willow creek (provincial park) 
+http://weather.gc.ca/rss/city/ab-42_e.xml,bow valley (provincial park) 
+http://weather.gc.ca/rss/city/ab-43_e.xml,bow island 
+http://weather.gc.ca/rss/city/ab-44_e.xml,stavely 
+http://weather.gc.ca/rss/city/ab-45_e.xml,grande cache 
+http://weather.gc.ca/rss/city/ab-46_e.xml,pincher creek 
+http://weather.gc.ca/rss/city/ab-47_e.xml,suffield 
+http://weather.gc.ca/rss/city/ab-48_e.xml,drayton valley 
+http://weather.gc.ca/rss/city/ab-49_e.xml,banff 
+http://weather.gc.ca/rss/city/ab-4_e.xml,high river 
+http://weather.gc.ca/rss/city/ab-50_e.xml,edmonton 
+http://weather.gc.ca/rss/city/ab-51_e.xml,medicine hat 
+http://weather.gc.ca/rss/city/ab-52_e.xml,calgary 
+http://weather.gc.ca/rss/city/ab-53_e.xml,sundre 
+http://weather.gc.ca/rss/city/ab-54_e.xml,slave lake 
+http://weather.gc.ca/rss/city/ab-55_e.xml,wainwright 
+http://weather.gc.ca/rss/city/ab-56_e.xml,whitecourt 
+http://weather.gc.ca/rss/city/ab-57_e.xml,beaverlodge 
+http://weather.gc.ca/rss/city/ab-58_e.xml,brooks 
+http://weather.gc.ca/rss/city/ab-59_e.xml,coronation 
+http://weather.gc.ca/rss/city/ab-5_e.xml,stettler 
+http://weather.gc.ca/rss/city/ab-60_e.xml,claresholm 
+http://weather.gc.ca/rss/city/ab-61_e.xml,calgary (olympic park) 
+http://weather.gc.ca/rss/city/ab-62_e.xml,drumheller 
+http://weather.gc.ca/rss/city/ab-63_e.xml,elk island (national park) 
+http://weather.gc.ca/rss/city/ab-64_e.xml,cardston 
+http://weather.gc.ca/rss/city/ab-65_e.xml,garden creek 
+http://weather.gc.ca/rss/city/ab-66_e.xml,waterton park 
+http://weather.gc.ca/rss/city/ab-67_e.xml,esther 
+http://weather.gc.ca/rss/city/ab-68_e.xml,highvale 
+http://weather.gc.ca/rss/city/ab-69_e.xml,three hills 
+http://weather.gc.ca/rss/city/ab-6_e.xml,strathmore 
+http://weather.gc.ca/rss/city/ab-70_e.xml,jasper 
+http://weather.gc.ca/rss/city/ab-71_e.xml,edmonton (int'l aprt) 
+http://weather.gc.ca/rss/city/ab-72_e.xml,edson 
+http://weather.gc.ca/rss/city/ab-7_e.xml,taber 
+http://weather.gc.ca/rss/city/ab-8_e.xml,westlock 
+http://weather.gc.ca/rss/city/ab-9_e.xml,wetaskiwin 
+http://weather.gc.ca/rss/city/bc-10_e.xml,rock creek 
+http://weather.gc.ca/rss/city/bc-11_e.xml,kootenay (national park) 
+http://weather.gc.ca/rss/city/bc-12_e.xml,clearwater 
+http://weather.gc.ca/rss/city/bc-13_e.xml,valemount 
+http://weather.gc.ca/rss/city/bc-14_e.xml,dease lake 
+http://weather.gc.ca/rss/city/bc-15_e.xml,estevan point 
+http://weather.gc.ca/rss/city/bc-16_e.xml,pemberton 
+http://weather.gc.ca/rss/city/bc-17_e.xml,tofino 
+http://weather.gc.ca/rss/city/bc-18_e.xml,bella coola 
+http://weather.gc.ca/rss/city/bc-19_e.xml,campbell river 
+http://weather.gc.ca/rss/city/bc-1_e.xml,gibsons 
+http://weather.gc.ca/rss/city/bc-20_e.xml,nanaimo 
+http://weather.gc.ca/rss/city/bc-21_e.xml,castlegar 
+http://weather.gc.ca/rss/city/bc-22_e.xml,blue river 
+http://weather.gc.ca/rss/city/bc-23_e.xml,chetwynd 
+http://weather.gc.ca/rss/city/bc-24_e.xml,chilliwack 
+http://weather.gc.ca/rss/city/bc-25_e.xml,dawson creek 
+http://weather.gc.ca/rss/city/bc-26_e.xml,creston 
+http://weather.gc.ca/rss/city/bc-27_e.xml,vernon 
+http://weather.gc.ca/rss/city/bc-28_e.xml,lillooet 
+http://weather.gc.ca/rss/city/bc-29_e.xml,malahat 
+http://weather.gc.ca/rss/city/bc-30_e.xml,kitimat 
+http://weather.gc.ca/rss/city/bc-31_e.xml,hope slide 
+http://weather.gc.ca/rss/city/bc-32_e.xml,gonzales point 
+http://weather.gc.ca/rss/city/bc-33_e.xml,lytton 
+http://weather.gc.ca/rss/city/bc-34_e.xml,golden 
+http://weather.gc.ca/rss/city/bc-35_e.xml,pitt meadows 
+http://weather.gc.ca/rss/city/bc-36_e.xml,hope 
+http://weather.gc.ca/rss/city/bc-37_e.xml,nelson 
+http://weather.gc.ca/rss/city/bc-38_e.xml,nakusp 
+http://weather.gc.ca/rss/city/bc-39_e.xml,grand forks 
+http://weather.gc.ca/rss/city/bc-3_e.xml,sechelt 
+http://weather.gc.ca/rss/city/bc-40_e.xml,esquimalt 
+http://weather.gc.ca/rss/city/bc-41_e.xml,princeton 
+http://weather.gc.ca/rss/city/bc-42_e.xml,puntzi mountain 
+http://weather.gc.ca/rss/city/bc-43_e.xml,burns lake 
+http://weather.gc.ca/rss/city/bc-44_e.xml,vanderhoof 
+http://weather.gc.ca/rss/city/bc-45_e.xml,kamloops 
+http://weather.gc.ca/rss/city/bc-46_e.xml,port alberni 
+http://weather.gc.ca/rss/city/bc-47_e.xml,mcbride 
+http://weather.gc.ca/rss/city/bc-48_e.xml,kelowna 
+http://weather.gc.ca/rss/city/bc-49_e.xml,merritt 
+http://weather.gc.ca/rss/city/bc-50_e.xml,squamish 
+http://weather.gc.ca/rss/city/bc-51_e.xml,salmon arm 
+http://weather.gc.ca/rss/city/bc-52_e.xml,sparwood 
+http://weather.gc.ca/rss/city/bc-53_e.xml,tetsa river (provincial park) 
+http://weather.gc.ca/rss/city/bc-54_e.xml,summerland 
+http://weather.gc.ca/rss/city/bc-55_e.xml,cache creek 
+http://weather.gc.ca/rss/city/bc-56_e.xml,masset 
+http://weather.gc.ca/rss/city/bc-57_e.xml,prince rupert 
+http://weather.gc.ca/rss/city/bc-58_e.xml,powell river 
+http://weather.gc.ca/rss/city/bc-59_e.xml,victoria (hartland) 
+http://weather.gc.ca/rss/city/bc-5_e.xml,ucluelet 
+http://weather.gc.ca/rss/city/bc-60_e.xml,tatlayoko lake 
+http://weather.gc.ca/rss/city/bc-61_e.xml,comox 
+http://weather.gc.ca/rss/city/bc-62_e.xml,white rock 
+http://weather.gc.ca/rss/city/bc-63_e.xml,muncho lake 
+http://weather.gc.ca/rss/city/bc-64_e.xml,quesnel 
+http://weather.gc.ca/rss/city/bc-65_e.xml,revelstoke 
+http://weather.gc.ca/rss/city/bc-66_e.xml,victoria (university of) 
+http://weather.gc.ca/rss/city/bc-67_e.xml,atlin 
+http://weather.gc.ca/rss/city/bc-68_e.xml,yoho (national park) 
+http://weather.gc.ca/rss/city/bc-69_e.xml,osoyoos 
+http://weather.gc.ca/rss/city/bc-6_e.xml,cassiar 
+http://weather.gc.ca/rss/city/bc-70_e.xml,agassiz 
+http://weather.gc.ca/rss/city/bc-71_e.xml,trail 
+http://weather.gc.ca/rss/city/bc-72_e.xml,invermere 
+http://weather.gc.ca/rss/city/bc-73_e.xml,stewart 
+http://weather.gc.ca/rss/city/bc-74_e.xml,vancouver 
+http://weather.gc.ca/rss/city/bc-75_e.xml,victoria harbour 
+http://weather.gc.ca/rss/city/bc-76_e.xml,williams lake 
+http://weather.gc.ca/rss/city/bc-77_e.xml,cranbrook 
+http://weather.gc.ca/rss/city/bc-78_e.xml,fort st. john 
+http://weather.gc.ca/rss/city/bc-79_e.xml,prince george 
+http://weather.gc.ca/rss/city/bc-7_e.xml,100 mile house 
+http://weather.gc.ca/rss/city/bc-80_e.xml,terrace 
+http://weather.gc.ca/rss/city/bc-81_e.xml,abbotsford 
+http://weather.gc.ca/rss/city/bc-82_e.xml,smithers 
+http://weather.gc.ca/rss/city/bc-83_e.xml,fort nelson 
+http://weather.gc.ca/rss/city/bc-84_e.xml,penticton 
+http://weather.gc.ca/rss/city/bc-85_e.xml,victoria 
+http://weather.gc.ca/rss/city/bc-86_e.xml,whistler 
+http://weather.gc.ca/rss/city/bc-87_e.xml,liard river 
+http://weather.gc.ca/rss/city/bc-88_e.xml,sandspit 
+http://weather.gc.ca/rss/city/bc-89_e.xml,port hardy 
+http://weather.gc.ca/rss/city/bc-8_e.xml,dome creek 
+http://weather.gc.ca/rss/city/bc-90_e.xml,mackenzie 
+http://weather.gc.ca/rss/city/bc-91_e.xml,clinton 
+http://weather.gc.ca/rss/city/bc-92_e.xml,courtenay 
+http://weather.gc.ca/rss/city/bc-93_e.xml,gulf islands (southern) 
+http://weather.gc.ca/rss/city/bc-94_e.xml,bella bella 
+http://weather.gc.ca/rss/city/bc-95_e.xml,cummins lakes (provincial park) 
+http://weather.gc.ca/rss/city/bc-9_e.xml,good hope lake 
+http://weather.gc.ca/rss/city/mb-10_e.xml,minnedosa 
+http://weather.gc.ca/rss/city/mb-11_e.xml,morris 
+http://weather.gc.ca/rss/city/mb-12_e.xml,snow lake 
+http://weather.gc.ca/rss/city/mb-13_e.xml,steinbach 
+http://weather.gc.ca/rss/city/mb-14_e.xml,oak point 
+http://weather.gc.ca/rss/city/mb-15_e.xml,mccreary 
+http://weather.gc.ca/rss/city/mb-16_e.xml,souris 
+http://weather.gc.ca/rss/city/mb-17_e.xml,morden 
+http://weather.gc.ca/rss/city/mb-18_e.xml,little grand rapids 
+http://weather.gc.ca/rss/city/mb-19_e.xml,pilot mound 
+http://weather.gc.ca/rss/city/mb-20_e.xml,virden 
+http://weather.gc.ca/rss/city/mb-21_e.xml,arnes 
+http://weather.gc.ca/rss/city/mb-22_e.xml,leaf rapids 
+http://weather.gc.ca/rss/city/mb-23_e.xml,sprague 
+http://weather.gc.ca/rss/city/mb-24_e.xml,fisher branch 
+http://weather.gc.ca/rss/city/mb-25_e.xml,norway house 
+http://weather.gc.ca/rss/city/mb-26_e.xml,winkler 
+http://weather.gc.ca/rss/city/mb-27_e.xml,oxford house 
+http://weather.gc.ca/rss/city/mb-28_e.xml,shoal lake 
+http://weather.gc.ca/rss/city/mb-29_e.xml,portage la prairie 
+http://weather.gc.ca/rss/city/mb-2_e.xml,dominion city 
+http://weather.gc.ca/rss/city/mb-30_e.xml,the pas 
+http://weather.gc.ca/rss/city/mb-31_e.xml,wasagaming 
+http://weather.gc.ca/rss/city/mb-32_e.xml,roblin 
+http://weather.gc.ca/rss/city/mb-33_e.xml,bissett 
+http://weather.gc.ca/rss/city/mb-34_e.xml,thompson 
+http://weather.gc.ca/rss/city/mb-35_e.xml,carberry 
+http://weather.gc.ca/rss/city/mb-36_e.xml,winnipeg (the forks) 
+http://weather.gc.ca/rss/city/mb-37_e.xml,bloodvein 
+http://weather.gc.ca/rss/city/mb-38_e.xml,winnipeg 
+http://weather.gc.ca/rss/city/mb-39_e.xml,shamattawa 
+http://weather.gc.ca/rss/city/mb-3_e.xml,altona 
+http://weather.gc.ca/rss/city/mb-40_e.xml,delta 
+http://weather.gc.ca/rss/city/mb-41_e.xml,lynn lake 
+http://weather.gc.ca/rss/city/mb-42_e.xml,churchill 
+http://weather.gc.ca/rss/city/mb-43_e.xml,bachelors island 
+http://weather.gc.ca/rss/city/mb-44_e.xml,pinawa 
+http://weather.gc.ca/rss/city/mb-45_e.xml,melita 
+http://weather.gc.ca/rss/city/mb-46_e.xml,swan river 
+http://weather.gc.ca/rss/city/mb-47_e.xml,emerson 
+http://weather.gc.ca/rss/city/mb-48_e.xml,gretna 
+http://weather.gc.ca/rss/city/mb-49_e.xml,deerwood 
+http://weather.gc.ca/rss/city/mb-4_e.xml,pine falls 
+http://weather.gc.ca/rss/city/mb-50_e.xml,hunters point 
+http://weather.gc.ca/rss/city/mb-51_e.xml,tadoule lake 
+http://weather.gc.ca/rss/city/mb-52_e.xml,brandon 
+http://weather.gc.ca/rss/city/mb-53_e.xml,brochet 
+http://weather.gc.ca/rss/city/mb-54_e.xml,berens river 
+http://weather.gc.ca/rss/city/mb-55_e.xml,victoria beach 
+http://weather.gc.ca/rss/city/mb-56_e.xml,york factory 
+http://weather.gc.ca/rss/city/mb-57_e.xml,grand rapids 
+http://weather.gc.ca/rss/city/mb-58_e.xml,dauphin 
+http://weather.gc.ca/rss/city/mb-59_e.xml,island lake 
+http://weather.gc.ca/rss/city/mb-5_e.xml,poplar river 
+http://weather.gc.ca/rss/city/mb-60_e.xml,flin flon 
+http://weather.gc.ca/rss/city/mb-61_e.xml,shilo 
+http://weather.gc.ca/rss/city/mb-62_e.xml,gimli 
+http://weather.gc.ca/rss/city/mb-63_e.xml,gods lake 
+http://weather.gc.ca/rss/city/mb-64_e.xml,gillam 
+http://weather.gc.ca/rss/city/mb-65_e.xml,carman 
+http://weather.gc.ca/rss/city/mb-66_e.xml,turtle mountain (provincial park) 
+http://weather.gc.ca/rss/city/mb-67_e.xml,pukatawagan 
+http://weather.gc.ca/rss/city/mb-6_e.xml,richer 
+http://weather.gc.ca/rss/city/mb-7_e.xml,vita 
+http://weather.gc.ca/rss/city/mb-8_e.xml,whiteshell 
+http://weather.gc.ca/rss/city/mb-9_e.xml,grand beach 
+http://weather.gc.ca/rss/city/nb-10_e.xml,mount carleton (provincial park) 
+http://weather.gc.ca/rss/city/nb-11_e.xml,oromocto 
+http://weather.gc.ca/rss/city/nb-12_e.xml,quispamsis 
+http://weather.gc.ca/rss/city/nb-13_e.xml,richibucto 
+http://weather.gc.ca/rss/city/nb-14_e.xml,rogersville 
+http://weather.gc.ca/rss/city/nb-15_e.xml,sackville 
+http://weather.gc.ca/rss/city/nb-16_e.xml,saint-quentin 
+http://weather.gc.ca/rss/city/nb-17_e.xml,shediac 
+http://weather.gc.ca/rss/city/nb-18_e.xml,saint andrews 
+http://weather.gc.ca/rss/city/nb-19_e.xml,sussex 
+http://weather.gc.ca/rss/city/nb-1_e.xml,bouctouche 
+http://weather.gc.ca/rss/city/nb-20_e.xml,tracadie-sheila 
+http://weather.gc.ca/rss/city/nb-21_e.xml,woodstock 
+http://weather.gc.ca/rss/city/nb-22_e.xml,bas-caraquet 
+http://weather.gc.ca/rss/city/nb-23_e.xml,saint john 
+http://weather.gc.ca/rss/city/nb-24_e.xml,st. leonard 
+http://weather.gc.ca/rss/city/nb-25_e.xml,miramichi 
+http://weather.gc.ca/rss/city/nb-26_e.xml,dalhousie 
+http://weather.gc.ca/rss/city/nb-27_e.xml,grand manan 
+http://weather.gc.ca/rss/city/nb-28_e.xml,bathurst 
+http://weather.gc.ca/rss/city/nb-29_e.xml,fredericton 
+http://weather.gc.ca/rss/city/nb-2_e.xml,campbellton 
+http://weather.gc.ca/rss/city/nb-30_e.xml,charlo 
+http://weather.gc.ca/rss/city/nb-31_e.xml,miscou island 
+http://weather.gc.ca/rss/city/nb-32_e.xml,edmundston 
+http://weather.gc.ca/rss/city/nb-33_e.xml,point lepreau 
+http://weather.gc.ca/rss/city/nb-34_e.xml,point escuminac 
+http://weather.gc.ca/rss/city/nb-35_e.xml,st. stephen 
+http://weather.gc.ca/rss/city/nb-36_e.xml,moncton 
+http://weather.gc.ca/rss/city/nb-3_e.xml,chipman 
+http://weather.gc.ca/rss/city/nb-4_e.xml,doaktown 
+http://weather.gc.ca/rss/city/nb-5_e.xml,fundy (national park) 
+http://weather.gc.ca/rss/city/nb-6_e.xml,grand falls 
+http://weather.gc.ca/rss/city/nb-8_e.xml,hopewell 
+http://weather.gc.ca/rss/city/nb-9_e.xml,kouchibouguac 
+http://weather.gc.ca/rss/city/nl-10_e.xml,musgrave harbour 
+http://weather.gc.ca/rss/city/nl-11_e.xml,port au choix 
+http://weather.gc.ca/rss/city/nl-12_e.xml,wabush lake 
+http://weather.gc.ca/rss/city/nl-13_e.xml,rocky harbour 
+http://weather.gc.ca/rss/city/nl-14_e.xml,bonavista 
+http://weather.gc.ca/rss/city/nl-15_e.xml,terra nova (national park) 
+http://weather.gc.ca/rss/city/nl-16_e.xml,gander 
+http://weather.gc.ca/rss/city/nl-17_e.xml,channel-port aux basques 
+http://weather.gc.ca/rss/city/nl-18_e.xml,wreckhouse 
+http://weather.gc.ca/rss/city/nl-19_e.xml,winterland 
+http://weather.gc.ca/rss/city/nl-1_e.xml,clarenville 
+http://weather.gc.ca/rss/city/nl-20_e.xml,labrador city 
+http://weather.gc.ca/rss/city/nl-21_e.xml,churchill falls 
+http://weather.gc.ca/rss/city/nl-22_e.xml,la scie 
+http://weather.gc.ca/rss/city/nl-23_e.xml,happy valley-goose bay 
+http://weather.gc.ca/rss/city/nl-24_e.xml,st. john's 
+http://weather.gc.ca/rss/city/nl-25_e.xml,makkovik 
+http://weather.gc.ca/rss/city/nl-26_e.xml,marble mountain 
+http://weather.gc.ca/rss/city/nl-27_e.xml,stephenville 
+http://weather.gc.ca/rss/city/nl-28_e.xml,cape race 
+http://weather.gc.ca/rss/city/nl-29_e.xml,mary's harbour 
+http://weather.gc.ca/rss/city/nl-2_e.xml,campbellton 
+http://weather.gc.ca/rss/city/nl-30_e.xml,placentia 
+http://weather.gc.ca/rss/city/nl-31_e.xml,burgeo 
+http://weather.gc.ca/rss/city/nl-32_e.xml,cartwright 
+http://weather.gc.ca/rss/city/nl-33_e.xml,daniel's harbour 
+http://weather.gc.ca/rss/city/nl-34_e.xml,badger 
+http://weather.gc.ca/rss/city/nl-35_e.xml,twillingate 
+http://weather.gc.ca/rss/city/nl-36_e.xml,st. lawrence 
+http://weather.gc.ca/rss/city/nl-37_e.xml,st. anthony 
+http://weather.gc.ca/rss/city/nl-38_e.xml,hopedale 
+http://weather.gc.ca/rss/city/nl-39_e.xml,deer lake 
+http://weather.gc.ca/rss/city/nl-3_e.xml,marystown 
+http://weather.gc.ca/rss/city/nl-40_e.xml,nain 
+http://weather.gc.ca/rss/city/nl-41_e.xml,corner brook 
+http://weather.gc.ca/rss/city/nl-42_e.xml,new-wes-valley 
+http://weather.gc.ca/rss/city/nl-43_e.xml,bay roberts 
+http://weather.gc.ca/rss/city/nl-44_e.xml,englee 
+http://weather.gc.ca/rss/city/nl-45_e.xml,l'anse-au-loup 
+http://weather.gc.ca/rss/city/nl-46_e.xml,rigolet 
+http://weather.gc.ca/rss/city/nl-47_e.xml,cartwright junction (trans-labrador hwy) 
+http://weather.gc.ca/rss/city/nl-48_e.xml,gull island rapids (trans-labrador hwy) 
+http://weather.gc.ca/rss/city/nl-4_e.xml,buchans 
+http://weather.gc.ca/rss/city/nl-5_e.xml,grand bank 
+http://weather.gc.ca/rss/city/nl-6_e.xml,grand falls-windsor 
+http://weather.gc.ca/rss/city/nl-7_e.xml,gros morne 
+http://weather.gc.ca/rss/city/nl-8_e.xml,st. alban's 
+http://weather.gc.ca/rss/city/nl-9_e.xml,lewisporte 
+http://weather.gc.ca/rss/city/ns-10_e.xml,sheet harbour 
+http://weather.gc.ca/rss/city/ns-11_e.xml,shelburne 
+http://weather.gc.ca/rss/city/ns-12_e.xml,st. peter's 
+http://weather.gc.ca/rss/city/ns-13_e.xml,parrsboro 
+http://weather.gc.ca/rss/city/ns-14_e.xml,tatamagouche 
+http://weather.gc.ca/rss/city/ns-15_e.xml,windsor 
+http://weather.gc.ca/rss/city/ns-16_e.xml,ingonish 
+http://weather.gc.ca/rss/city/ns-17_e.xml,kentville 
+http://weather.gc.ca/rss/city/ns-18_e.xml,north east margaree 
+http://weather.gc.ca/rss/city/ns-19_e.xml,halifax 
+http://weather.gc.ca/rss/city/ns-1_e.xml,new glasgow 
+http://weather.gc.ca/rss/city/ns-20_e.xml,digby 
+http://weather.gc.ca/rss/city/ns-21_e.xml,lunenburg 
+http://weather.gc.ca/rss/city/ns-22_e.xml,malay falls 
+http://weather.gc.ca/rss/city/ns-23_e.xml,hart island 
+http://weather.gc.ca/rss/city/ns-24_e.xml,fourchu head 
+http://weather.gc.ca/rss/city/ns-25_e.xml,truro 
+http://weather.gc.ca/rss/city/ns-26_e.xml,port hawkesbury 
+http://weather.gc.ca/rss/city/ns-27_e.xml,brier island 
+http://weather.gc.ca/rss/city/ns-28_e.xml,tracadie 
+http://weather.gc.ca/rss/city/ns-29_e.xml,yarmouth 
+http://weather.gc.ca/rss/city/ns-2_e.xml,annapolis royal 
+http://weather.gc.ca/rss/city/ns-30_e.xml,western head 
+http://weather.gc.ca/rss/city/ns-31_e.xml,sydney 
+http://weather.gc.ca/rss/city/ns-32_e.xml,grand Etang 
+http://weather.gc.ca/rss/city/ns-33_e.xml,amherst 
+http://weather.gc.ca/rss/city/ns-34_e.xml,caribou 
+http://weather.gc.ca/rss/city/ns-35_e.xml,greenwood 
+http://weather.gc.ca/rss/city/ns-36_e.xml,beaver island 
+http://weather.gc.ca/rss/city/ns-37_e.xml,baccaro point 
+http://weather.gc.ca/rss/city/ns-38_e.xml,cheticamp 
+http://weather.gc.ca/rss/city/ns-39_e.xml,liverpool 
+http://weather.gc.ca/rss/city/ns-3_e.xml,antigonish 
+http://weather.gc.ca/rss/city/ns-40_e.xml,halifax (shearwater) 
+http://weather.gc.ca/rss/city/ns-41_e.xml,cape george 
+http://weather.gc.ca/rss/city/ns-42_e.xml,kejimkujik (national park) 
+http://weather.gc.ca/rss/city/ns-43_e.xml,north mountain (cape breton) 
+http://weather.gc.ca/rss/city/ns-44_e.xml,eskasoni 
+http://weather.gc.ca/rss/city/ns-4_e.xml,baddeck 
+http://weather.gc.ca/rss/city/ns-5_e.xml,bridgetown 
+http://weather.gc.ca/rss/city/ns-6_e.xml,bridgewater 
+http://weather.gc.ca/rss/city/ns-7_e.xml,economy 
+http://weather.gc.ca/rss/city/ns-8_e.xml,guysborough 
+http://weather.gc.ca/rss/city/nt-10_e.xml,fort mcpherson 
+http://weather.gc.ca/rss/city/nt-11_e.xml,tulita 
+http://weather.gc.ca/rss/city/nt-12_e.xml,nahanni butte 
+http://weather.gc.ca/rss/city/nt-13_e.xml,aklavik 
+http://weather.gc.ca/rss/city/nt-14_e.xml,ekati (lac de gras) 
+http://weather.gc.ca/rss/city/nt-15_e.xml,trout lake 
+http://weather.gc.ca/rss/city/nt-16_e.xml,paulatuk 
+http://weather.gc.ca/rss/city/nt-17_e.xml,fort smith 
+http://weather.gc.ca/rss/city/nt-18_e.xml,gameti 
+http://weather.gc.ca/rss/city/nt-19_e.xml,sachs harbour 
+http://weather.gc.ca/rss/city/nt-1_e.xml,detah 
+http://weather.gc.ca/rss/city/nt-20_e.xml,tuktoyaktuk 
+http://weather.gc.ca/rss/city/nt-21_e.xml,norman wells 
+http://weather.gc.ca/rss/city/nt-22_e.xml,deline 
+http://weather.gc.ca/rss/city/nt-23_e.xml,wrigley 
+http://weather.gc.ca/rss/city/nt-24_e.xml,yellowknife 
+http://weather.gc.ca/rss/city/nt-26_e.xml,colville lake 
+http://weather.gc.ca/rss/city/nt-27_e.xml,fort providence 
+http://weather.gc.ca/rss/city/nt-28_e.xml,indin river 
+http://weather.gc.ca/rss/city/nt-29_e.xml,fort liard 
+http://weather.gc.ca/rss/city/nt-2_e.xml,enterprise 
+http://weather.gc.ca/rss/city/nt-30_e.xml,inuvik 
+http://weather.gc.ca/rss/city/nt-31_e.xml,lutselke 
+http://weather.gc.ca/rss/city/nt-3_e.xml,fort resolution 
+http://weather.gc.ca/rss/city/nt-4_e.xml,fort simpson 
+http://weather.gc.ca/rss/city/nt-5_e.xml,fort good hope 
+http://weather.gc.ca/rss/city/nt-6_e.xml,whati 
+http://weather.gc.ca/rss/city/nt-7_e.xml,ulukhaktok 
+http://weather.gc.ca/rss/city/nt-8_e.xml,hay river 
+http://weather.gc.ca/rss/city/nt-9_e.xml,wekweeti 
+http://weather.gc.ca/rss/city/nu-10_e.xml,arctic bay 
+http://weather.gc.ca/rss/city/nu-11_e.xml,eureka 
+http://weather.gc.ca/rss/city/nu-12_e.xml,grise fiord 
+http://weather.gc.ca/rss/city/nu-13_e.xml,kugaaruk 
+http://weather.gc.ca/rss/city/nu-14_e.xml,baker lake 
+http://weather.gc.ca/rss/city/nu-15_e.xml,cambridge bay 
+http://weather.gc.ca/rss/city/nu-16_e.xml,kugluktuk 
+http://weather.gc.ca/rss/city/nu-17_e.xml,chesterfield 
+http://weather.gc.ca/rss/city/nu-18_e.xml,clyde river 
+http://weather.gc.ca/rss/city/nu-19_e.xml,ennadai 
+http://weather.gc.ca/rss/city/nu-1_e.xml,nanisivik 
+http://weather.gc.ca/rss/city/nu-20_e.xml,arviat 
+http://weather.gc.ca/rss/city/nu-21_e.xml,iqaluit 
+http://weather.gc.ca/rss/city/nu-22_e.xml,alert 
+http://weather.gc.ca/rss/city/nu-23_e.xml,igloolik 
+http://weather.gc.ca/rss/city/nu-24_e.xml,gjoa haven 
+http://weather.gc.ca/rss/city/nu-25_e.xml,pond inlet 
+http://weather.gc.ca/rss/city/nu-26_e.xml,kimmirut 
+http://weather.gc.ca/rss/city/nu-27_e.xml,resolute 
+http://weather.gc.ca/rss/city/nu-28_e.xml,rankin inlet 
+http://weather.gc.ca/rss/city/nu-29_e.xml,sanikiluaq 
+http://weather.gc.ca/rss/city/nu-2_e.xml,cape dorset 
+http://weather.gc.ca/rss/city/nu-3_e.xml,naujaat 
+http://weather.gc.ca/rss/city/nu-4_e.xml,hall beach 
+http://weather.gc.ca/rss/city/nu-5_e.xml,qikiqtarjuaq 
+http://weather.gc.ca/rss/city/nu-6_e.xml,whale cove 
+http://weather.gc.ca/rss/city/nu-7_e.xml,pangnirtung 
+http://weather.gc.ca/rss/city/nu-8_e.xml,taloyoak 
+http://weather.gc.ca/rss/city/nu-9_e.xml,coral harbour 
+http://weather.gc.ca/rss/city/on-100_e.xml,thunder bay 
+http://weather.gc.ca/rss/city/on-101_e.xml,ogoki 
+http://weather.gc.ca/rss/city/on-102_e.xml,bancroft 
+http://weather.gc.ca/rss/city/on-103_e.xml,parry sound 
+http://weather.gc.ca/rss/city/on-104_e.xml,red lake 
+http://weather.gc.ca/rss/city/on-105_e.xml,sachigo lake 
+http://weather.gc.ca/rss/city/on-106_e.xml,smiths falls 
+http://weather.gc.ca/rss/city/on-107_e.xml,st. catharines 
+http://weather.gc.ca/rss/city/on-108_e.xml,marathon 
+http://weather.gc.ca/rss/city/on-109_e.xml,vineland 
+http://weather.gc.ca/rss/city/on-110_e.xml,wingham 
+http://weather.gc.ca/rss/city/on-111_e.xml,armstrong 
+http://weather.gc.ca/rss/city/on-112_e.xml,petawawa 
+http://weather.gc.ca/rss/city/on-113_e.xml,moosonee 
+http://weather.gc.ca/rss/city/on-114_e.xml,alliston 
+http://weather.gc.ca/rss/city/on-115_e.xml,stirling 
+http://weather.gc.ca/rss/city/on-116_e.xml,stratford 
+http://weather.gc.ca/rss/city/on-117_e.xml,oshawa 
+http://weather.gc.ca/rss/city/on-118_e.xml,ottawa (kanata - orleans) 
+http://weather.gc.ca/rss/city/on-119_e.xml,whitby 
+http://weather.gc.ca/rss/city/on-11_e.xml,chatham-kent 
+http://weather.gc.ca/rss/city/on-120_e.xml,pickle lake 
+http://weather.gc.ca/rss/city/on-121_e.xml,peterborough 
+http://weather.gc.ca/rss/city/on-122_e.xml,alexandria 
+http://weather.gc.ca/rss/city/on-123_e.xml,terrace bay 
+http://weather.gc.ca/rss/city/on-124_e.xml,big trout lake 
+http://weather.gc.ca/rss/city/on-125_e.xml,niagara falls 
+http://weather.gc.ca/rss/city/on-126_e.xml,trenton 
+http://weather.gc.ca/rss/city/on-127_e.xml,timmins 
+http://weather.gc.ca/rss/city/on-128_e.xml,toronto island 
+http://weather.gc.ca/rss/city/on-129_e.xml,sandy lake 
+http://weather.gc.ca/rss/city/on-12_e.xml,fort erie 
+http://weather.gc.ca/rss/city/on-130_e.xml,wiarton 
+http://weather.gc.ca/rss/city/on-131_e.xml,pembroke 
+http://weather.gc.ca/rss/city/on-132_e.xml,webequie 
+http://weather.gc.ca/rss/city/on-133_e.xml,barry's bay 
+http://weather.gc.ca/rss/city/on-134_e.xml,savant lake 
+http://weather.gc.ca/rss/city/on-135_e.xml,sioux lookout 
+http://weather.gc.ca/rss/city/on-136_e.xml,earlton 
+http://weather.gc.ca/rss/city/on-137_e.xml,london 
+http://weather.gc.ca/rss/city/on-138_e.xml,wawa 
+http://weather.gc.ca/rss/city/on-139_e.xml,north bay 
+http://weather.gc.ca/rss/city/on-13_e.xml,orillia 
+http://weather.gc.ca/rss/city/on-140_e.xml,orangeville 
+http://weather.gc.ca/rss/city/on-141_e.xml,rondeau (provincial park) 
+http://weather.gc.ca/rss/city/on-142_e.xml,kapuskasing 
+http://weather.gc.ca/rss/city/on-143_e.xml,toronto 
+http://weather.gc.ca/rss/city/on-144_e.xml,gore bay 
+http://weather.gc.ca/rss/city/on-145_e.xml,kakabeka falls 
+http://weather.gc.ca/rss/city/on-146_e.xml,killarney 
+http://weather.gc.ca/rss/city/on-147_e.xml,sarnia 
+http://weather.gc.ca/rss/city/on-148_e.xml,atikokan 
+http://weather.gc.ca/rss/city/on-149_e.xml,port perry 
+http://weather.gc.ca/rss/city/on-14_e.xml,welland 
+http://weather.gc.ca/rss/city/on-150_e.xml,collingwood 
+http://weather.gc.ca/rss/city/on-151_e.xml,barrie 
+http://weather.gc.ca/rss/city/on-152_e.xml,cornwall 
+http://weather.gc.ca/rss/city/on-153_e.xml,greenstone (beardmore) 
+http://weather.gc.ca/rss/city/on-154_e.xml,upsala 
+http://weather.gc.ca/rss/city/on-155_e.xml,winchester 
+http://weather.gc.ca/rss/city/on-156_e.xml,ignace 
+http://weather.gc.ca/rss/city/on-157_e.xml,tobermory 
+http://weather.gc.ca/rss/city/on-158_e.xml,wunnummin lake 
+http://weather.gc.ca/rss/city/on-159_e.xml,fort frances 
+http://weather.gc.ca/rss/city/on-15_e.xml,woodstock 
+http://weather.gc.ca/rss/city/on-160_e.xml,goderich 
+http://weather.gc.ca/rss/city/on-161_e.xml,simcoe 
+http://weather.gc.ca/rss/city/on-162_e.xml,sault ste. marie 
+http://weather.gc.ca/rss/city/on-163_e.xml,montreal river harbour 
+http://weather.gc.ca/rss/city/on-164_e.xml,attawapiskat 
+http://weather.gc.ca/rss/city/on-165_e.xml,haliburton 
+http://weather.gc.ca/rss/city/on-166_e.xml,sioux narrows 
+http://weather.gc.ca/rss/city/on-167_e.xml,ear falls 
+http://weather.gc.ca/rss/city/on-168_e.xml,kawartha lakes (lindsay) 
+http://weather.gc.ca/rss/city/on-169_e.xml,midland 
+http://weather.gc.ca/rss/city/on-16_e.xml,walkerton 
+http://weather.gc.ca/rss/city/on-170_e.xml,elliot lake 
+http://weather.gc.ca/rss/city/on-171_e.xml,fort severn 
+http://weather.gc.ca/rss/city/on-172_e.xml,rodney 
+http://weather.gc.ca/rss/city/on-173_e.xml,fort albany 
+http://weather.gc.ca/rss/city/on-174_e.xml,sudbury (greater) 
+http://weather.gc.ca/rss/city/on-17_e.xml,tillsonburg 
+http://weather.gc.ca/rss/city/on-18_e.xml,strathroy 
+http://weather.gc.ca/rss/city/on-19_e.xml,port elgin 
+http://weather.gc.ca/rss/city/on-1_e.xml,algonquin park (brent) 
+http://weather.gc.ca/rss/city/on-21_e.xml,blind river 
+http://weather.gc.ca/rss/city/on-22_e.xml,temiskaming shores 
+http://weather.gc.ca/rss/city/on-23_e.xml,leamington 
+http://weather.gc.ca/rss/city/on-24_e.xml,mississauga 
+http://weather.gc.ca/rss/city/on-25_e.xml,newmarket 
+http://weather.gc.ca/rss/city/on-26_e.xml,nipigon 
+http://weather.gc.ca/rss/city/on-27_e.xml,prince edward (picton) 
+http://weather.gc.ca/rss/city/on-28_e.xml,kincardine 
+http://weather.gc.ca/rss/city/on-29_e.xml,algonquin park (lake of two rivers) 
+http://weather.gc.ca/rss/city/on-30_e.xml,apsley 
+http://weather.gc.ca/rss/city/on-31_e.xml,burk's falls 
+http://weather.gc.ca/rss/city/on-32_e.xml,caledon 
+http://weather.gc.ca/rss/city/on-33_e.xml,cochrane 
+http://weather.gc.ca/rss/city/on-34_e.xml,dorion 
+http://weather.gc.ca/rss/city/on-35_e.xml,dunchurch 
+http://weather.gc.ca/rss/city/on-36_e.xml,dundalk 
+http://weather.gc.ca/rss/city/on-37_e.xml,gogama 
+http://weather.gc.ca/rss/city/on-38_e.xml,gravenhurst 
+http://weather.gc.ca/rss/city/on-39_e.xml,greater napanee 
+http://weather.gc.ca/rss/city/on-3_e.xml,belleville 
+http://weather.gc.ca/rss/city/on-40_e.xml,greater sudbury 
+http://weather.gc.ca/rss/city/on-41_e.xml,gull bay 
+http://weather.gc.ca/rss/city/on-42_e.xml,haldimand county 
+http://weather.gc.ca/rss/city/on-43_e.xml,kaladar 
+http://weather.gc.ca/rss/city/on-44_e.xml,kawartha lakes (fenelon falls) 
+http://weather.gc.ca/rss/city/on-45_e.xml,lake superior (provincial park) 
+http://weather.gc.ca/rss/city/on-46_e.xml,lambton shores 
+http://weather.gc.ca/rss/city/on-47_e.xml,lincoln 
+http://weather.gc.ca/rss/city/on-48_e.xml,mine centre 
+http://weather.gc.ca/rss/city/on-49_e.xml,new tecumseth 
+http://weather.gc.ca/rss/city/on-4_e.xml,brampton 
+http://weather.gc.ca/rss/city/on-50_e.xml,norfolk 
+http://weather.gc.ca/rss/city/on-51_e.xml,north perth 
+http://weather.gc.ca/rss/city/on-52_e.xml,ottawa (richmond - metcalfe) 
+http://weather.gc.ca/rss/city/on-53_e.xml,oxtongue lake 
+http://weather.gc.ca/rss/city/on-54_e.xml,pickering 
+http://weather.gc.ca/rss/city/on-55_e.xml,pikangikum 
+http://weather.gc.ca/rss/city/on-56_e.xml,port carling 
+http://weather.gc.ca/rss/city/on-57_e.xml,quinte west 
+http://weather.gc.ca/rss/city/on-58_e.xml,renfrew 
+http://weather.gc.ca/rss/city/on-59_e.xml,richmond hill 
+http://weather.gc.ca/rss/city/on-5_e.xml,guelph 
+http://weather.gc.ca/rss/city/on-60_e.xml,saugeen shores 
+http://weather.gc.ca/rss/city/on-61_e.xml,sharbot lake 
+http://weather.gc.ca/rss/city/on-62_e.xml,south bruce peninsula 
+http://weather.gc.ca/rss/city/on-63_e.xml,sydenham 
+http://weather.gc.ca/rss/city/on-64_e.xml,vaughan 
+http://weather.gc.ca/rss/city/on-65_e.xml,west nipissing 
+http://weather.gc.ca/rss/city/on-66_e.xml,westport 
+http://weather.gc.ca/rss/city/on-67_e.xml,white river 
+http://weather.gc.ca/rss/city/on-68_e.xml,halton hills 
+http://weather.gc.ca/rss/city/on-69_e.xml,kingston 
+http://weather.gc.ca/rss/city/on-70_e.xml,greenstone (geraldton) 
+http://weather.gc.ca/rss/city/on-71_e.xml,hawkesbury 
+http://weather.gc.ca/rss/city/on-72_e.xml,dryden 
+http://weather.gc.ca/rss/city/on-73_e.xml,hearst 
+http://weather.gc.ca/rss/city/on-74_e.xml,kemptville 
+http://weather.gc.ca/rss/city/on-75_e.xml,cobourg 
+http://weather.gc.ca/rss/city/on-76_e.xml,kirkland lake 
+http://weather.gc.ca/rss/city/on-77_e.xml,hamilton 
+http://weather.gc.ca/rss/city/on-78_e.xml,hornepayne 
+http://weather.gc.ca/rss/city/on-79_e.xml,oakville 
+http://weather.gc.ca/rss/city/on-7_e.xml,owen sound 
+http://weather.gc.ca/rss/city/on-80_e.xml,port colborne 
+http://weather.gc.ca/rss/city/on-81_e.xml,cambridge 
+http://weather.gc.ca/rss/city/on-82_e.xml,kitchener-waterloo 
+http://weather.gc.ca/rss/city/on-83_e.xml,deep river 
+http://weather.gc.ca/rss/city/on-84_e.xml,shelburne 
+http://weather.gc.ca/rss/city/on-85_e.xml,markham 
+http://weather.gc.ca/rss/city/on-86_e.xml,brantford 
+http://weather.gc.ca/rss/city/on-87_e.xml,lansdowne house 
+http://weather.gc.ca/rss/city/on-88_e.xml,huntsville 
+http://weather.gc.ca/rss/city/on-89_e.xml,mount forest 
+http://weather.gc.ca/rss/city/on-8_e.xml,brockville 
+http://weather.gc.ca/rss/city/on-90_e.xml,gananoque 
+http://weather.gc.ca/rss/city/on-91_e.xml,chapleau 
+http://weather.gc.ca/rss/city/on-92_e.xml,morrisburg 
+http://weather.gc.ca/rss/city/on-93_e.xml,muskoka 
+http://weather.gc.ca/rss/city/on-94_e.xml,windsor 
+http://weather.gc.ca/rss/city/on-95_e.xml,burlington 
+http://weather.gc.ca/rss/city/on-96_e.xml,kenora 
+http://weather.gc.ca/rss/city/on-97_e.xml,greenstone (nakina) 
+http://weather.gc.ca/rss/city/on-98_e.xml,st. thomas 
+http://weather.gc.ca/rss/city/on-99_e.xml,peawanuck 
+http://weather.gc.ca/rss/city/on-9_e.xml,bracebridge 
+http://weather.gc.ca/rss/city/pe-1_e.xml,north cape 
+http://weather.gc.ca/rss/city/pe-2_e.xml,maple plains 
+http://weather.gc.ca/rss/city/pe-3_e.xml,summerside 
+http://weather.gc.ca/rss/city/pe-4_e.xml,st. peters bay 
+http://weather.gc.ca/rss/city/pe-5_e.xml,charlottetown 
+http://weather.gc.ca/rss/city/pe-6_e.xml,east point 
+http://weather.gc.ca/rss/city/qc-100_e.xml,la grande-quatre 
+http://weather.gc.ca/rss/city/qc-101_e.xml,gaspe 
+http://weather.gc.ca/rss/city/qc-102_e.xml,maniwaki 
+http://weather.gc.ca/rss/city/qc-103_e.xml,Iles-de-la-madeleine 
+http://weather.gc.ca/rss/city/qc-104_e.xml,havre st-pierre 
+http://weather.gc.ca/rss/city/qc-105_e.xml,kuujjuarapik 
+http://weather.gc.ca/rss/city/qc-106_e.xml,quaqtaq 
+http://weather.gc.ca/rss/city/qc-107_e.xml,tadoussac 
+http://weather.gc.ca/rss/city/qc-108_e.xml,riviere-du-loup 
+http://weather.gc.ca/rss/city/qc-109_e.xml,longueuil 
+http://weather.gc.ca/rss/city/qc-110_e.xml,nicolet 
+http://weather.gc.ca/rss/city/qc-111_e.xml,new carlisle 
+http://weather.gc.ca/rss/city/qc-112_e.xml,ivujivik 
+http://weather.gc.ca/rss/city/qc-113_e.xml,laurentides (reserve faunique) 
+http://weather.gc.ca/rss/city/qc-114_e.xml,parent 
+http://weather.gc.ca/rss/city/qc-115_e.xml,schefferville 
+http://weather.gc.ca/rss/city/qc-116_e.xml,waskaganish 
+http://weather.gc.ca/rss/city/qc-117_e.xml,aupaluk 
+http://weather.gc.ca/rss/city/qc-118_e.xml,kangiqsualujjuaq 
+http://weather.gc.ca/rss/city/qc-119_e.xml,charlevoix 
+http://weather.gc.ca/rss/city/qc-11_e.xml,la malbaie 
+http://weather.gc.ca/rss/city/qc-120_e.xml,cap chat 
+http://weather.gc.ca/rss/city/qc-121_e.xml,chibougamau 
+http://weather.gc.ca/rss/city/qc-122_e.xml,umiujaq 
+http://weather.gc.ca/rss/city/qc-123_e.xml,mirabel 
+http://weather.gc.ca/rss/city/qc-124_e.xml,montmagny 
+http://weather.gc.ca/rss/city/qc-125_e.xml,natashquan 
+http://weather.gc.ca/rss/city/qc-126_e.xml,gatineau 
+http://weather.gc.ca/rss/city/qc-127_e.xml,mont-joli 
+http://weather.gc.ca/rss/city/qc-128_e.xml,salluit 
+http://weather.gc.ca/rss/city/qc-129_e.xml,matagami 
+http://weather.gc.ca/rss/city/qc-130_e.xml,trois-rivieres 
+http://weather.gc.ca/rss/city/qc-131_e.xml,inukjuak 
+http://weather.gc.ca/rss/city/qc-132_e.xml,shawinigan 
+http://weather.gc.ca/rss/city/qc-133_e.xml,quebec 
+http://weather.gc.ca/rss/city/qc-134_e.xml,roberval 
+http://weather.gc.ca/rss/city/qc-135_e.xml,sutton 
+http://weather.gc.ca/rss/city/qc-136_e.xml,sherbrooke 
+http://weather.gc.ca/rss/city/qc-137_e.xml,joliette 
+http://weather.gc.ca/rss/city/qc-138_e.xml,rimouski 
+http://weather.gc.ca/rss/city/qc-139_e.xml,temiscamingue 
+http://weather.gc.ca/rss/city/qc-13_e.xml,saint-jerome 
+http://weather.gc.ca/rss/city/qc-140_e.xml,farnham 
+http://weather.gc.ca/rss/city/qc-141_e.xml,sept-Iles 
+http://weather.gc.ca/rss/city/qc-142_e.xml,port-menier 
+http://weather.gc.ca/rss/city/qc-143_e.xml,salaberry-de-valleyfield 
+http://weather.gc.ca/rss/city/qc-144_e.xml,alma 
+http://weather.gc.ca/rss/city/qc-145_e.xml,tasiujaq 
+http://weather.gc.ca/rss/city/qc-146_e.xml,amqui 
+http://weather.gc.ca/rss/city/qc-147_e.xml,montreal 
+http://weather.gc.ca/rss/city/qc-148_e.xml,rouyn-noranda 
+http://weather.gc.ca/rss/city/qc-149_e.xml,val-d'or 
+http://weather.gc.ca/rss/city/qc-14_e.xml,lachute 
+http://weather.gc.ca/rss/city/qc-150_e.xml,kuujjuaq 
+http://weather.gc.ca/rss/city/qc-151_e.xml,matapedia 
+http://weather.gc.ca/rss/city/qc-152_e.xml,chevery 
+http://weather.gc.ca/rss/city/qc-153_e.xml,manicouagan 
+http://weather.gc.ca/rss/city/qc-154_e.xml,la tuque 
+http://weather.gc.ca/rss/city/qc-155_e.xml,kangiqsujuaq 
+http://weather.gc.ca/rss/city/qc-156_e.xml,l'assomption 
+http://weather.gc.ca/rss/city/qc-157_e.xml,victoriaville 
+http://weather.gc.ca/rss/city/qc-158_e.xml,la grande riviere 
+http://weather.gc.ca/rss/city/qc-159_e.xml,kangirsuk 
+http://weather.gc.ca/rss/city/qc-15_e.xml,matane 
+http://weather.gc.ca/rss/city/qc-160_e.xml,baie-comeau 
+http://weather.gc.ca/rss/city/qc-161_e.xml,bagotville 
+http://weather.gc.ca/rss/city/qc-162_e.xml,varennes 
+http://weather.gc.ca/rss/city/qc-163_e.xml,blanc-sablon 
+http://weather.gc.ca/rss/city/qc-165_e.xml,baie-saint-paul 
+http://weather.gc.ca/rss/city/qc-166_e.xml,saguenay 
+http://weather.gc.ca/rss/city/qc-167_e.xml,mont-tremblant 
+http://weather.gc.ca/rss/city/qc-168_e.xml,amos 
+http://weather.gc.ca/rss/city/qc-169_e.xml,grande-vallee 
+http://weather.gc.ca/rss/city/qc-16_e.xml,murdochville 
+http://weather.gc.ca/rss/city/qc-17_e.xml,papineau 
+http://weather.gc.ca/rss/city/qc-18_e.xml,perce 
+http://weather.gc.ca/rss/city/qc-19_e.xml,pontiac 
+http://weather.gc.ca/rss/city/qc-20_e.xml,pointe-a-la-croix 
+http://weather.gc.ca/rss/city/qc-21_e.xml,richelieu 
+http://weather.gc.ca/rss/city/qc-22_e.xml,saint-hyacinthe 
+http://weather.gc.ca/rss/city/qc-24_e.xml,trois-pistoles 
+http://weather.gc.ca/rss/city/qc-25_e.xml,berthierville 
+http://weather.gc.ca/rss/city/qc-26_e.xml,escoumins 
+http://weather.gc.ca/rss/city/qc-27_e.xml,forestville 
+http://weather.gc.ca/rss/city/qc-28_e.xml,saint-jean-sur-richelieu 
+http://weather.gc.ca/rss/city/qc-29_e.xml,fermont 
+http://weather.gc.ca/rss/city/qc-2_e.xml,drummondville 
+http://weather.gc.ca/rss/city/qc-30_e.xml,la verendrye (reserve faunique) 
+http://weather.gc.ca/rss/city/qc-33_e.xml,sainte-agathe 
+http://weather.gc.ca/rss/city/qc-35_e.xml,temiscouata 
+http://weather.gc.ca/rss/city/qc-36_e.xml,akulivik 
+http://weather.gc.ca/rss/city/qc-38_e.xml,asbestos 
+http://weather.gc.ca/rss/city/qc-40_e.xml,puvirnituq 
+http://weather.gc.ca/rss/city/qc-41_e.xml,vanier 
+http://weather.gc.ca/rss/city/qc-42_e.xml,val-des-monts 
+http://weather.gc.ca/rss/city/qc-45_e.xml,la sarre 
+http://weather.gc.ca/rss/city/qc-46_e.xml,contrecoeur 
+http://weather.gc.ca/rss/city/qc-47_e.xml,mont-laurier 
+http://weather.gc.ca/rss/city/qc-48_e.xml,beauceville 
+http://weather.gc.ca/rss/city/qc-49_e.xml,beauharnois 
+http://weather.gc.ca/rss/city/qc-50_e.xml,becancour 
+http://weather.gc.ca/rss/city/qc-51_e.xml,bernieres 
+http://weather.gc.ca/rss/city/qc-52_e.xml,blainville 
+http://weather.gc.ca/rss/city/qc-53_e.xml,boisbriand 
+http://weather.gc.ca/rss/city/qc-54_e.xml,bonaventure 
+http://weather.gc.ca/rss/city/qc-55_e.xml,candiac 
+http://weather.gc.ca/rss/city/qc-56_e.xml,carignan 
+http://weather.gc.ca/rss/city/qc-57_e.xml,carleton-sur-mer 
+http://weather.gc.ca/rss/city/qc-58_e.xml,chambly 
+http://weather.gc.ca/rss/city/qc-59_e.xml,chelsea 
+http://weather.gc.ca/rss/city/qc-5_e.xml,granby 
+http://weather.gc.ca/rss/city/qc-60_e.xml,coaticook 
+http://weather.gc.ca/rss/city/qc-61_e.xml,cowansville 
+http://weather.gc.ca/rss/city/qc-62_e.xml,delson 
+http://weather.gc.ca/rss/city/qc-63_e.xml,deux-montagnes 
+http://weather.gc.ca/rss/city/qc-64_e.xml,dolbeau-mistassini 
+http://weather.gc.ca/rss/city/qc-65_e.xml,donnacona 
+http://weather.gc.ca/rss/city/qc-66_e.xml,vaudreuil-dorion 
+http://weather.gc.ca/rss/city/qc-67_e.xml,forillon 
+http://weather.gc.ca/rss/city/qc-68_e.xml,huntingdon 
+http://weather.gc.ca/rss/city/qc-69_e.xml,baie-james 
+http://weather.gc.ca/rss/city/qc-70_e.xml,kamouraska 
+http://weather.gc.ca/rss/city/qc-71_e.xml,la prairie 
+http://weather.gc.ca/rss/city/qc-72_e.xml,lac-megantic 
+http://weather.gc.ca/rss/city/qc-73_e.xml,lac-saint-jean 
+http://weather.gc.ca/rss/city/qc-74_e.xml,lanaudiere 
+http://weather.gc.ca/rss/city/qc-76_e.xml,laval 
+http://weather.gc.ca/rss/city/qc-77_e.xml,l'islet 
+http://weather.gc.ca/rss/city/qc-78_e.xml,levis 
+http://weather.gc.ca/rss/city/qc-81_e.xml,lorraine 
+http://weather.gc.ca/rss/city/qc-83_e.xml,magog 
+http://weather.gc.ca/rss/city/qc-84_e.xml,marieville 
+http://weather.gc.ca/rss/city/qc-85_e.xml,mascouche 
+http://weather.gc.ca/rss/city/qc-89_e.xml,mauricie 
+http://weather.gc.ca/rss/city/qc-90_e.xml,mingan 
+http://weather.gc.ca/rss/city/qc-92_e.xml,mont saint-hilaire 
+http://weather.gc.ca/rss/city/qc-93_e.xml,otterburn park 
+http://weather.gc.ca/rss/city/qc-94_e.xml,gaspesie (parc national) 
+http://weather.gc.ca/rss/city/qc-95_e.xml,forillon (national park) 
+http://weather.gc.ca/rss/city/qc-96_e.xml,pincourt 
+http://weather.gc.ca/rss/city/qc-97_e.xml,port-cartier 
+http://weather.gc.ca/rss/city/qc-98_e.xml,prevost 
+http://weather.gc.ca/rss/city/qc-99_e.xml,lac raglan 
+http://weather.gc.ca/rss/city/sk-10_e.xml,oxbow 
+http://weather.gc.ca/rss/city/sk-11_e.xml,shaunavon 
+http://weather.gc.ca/rss/city/sk-12_e.xml,tisdale 
+http://weather.gc.ca/rss/city/sk-13_e.xml,la loche 
+http://weather.gc.ca/rss/city/sk-14_e.xml,lucky lake 
+http://weather.gc.ca/rss/city/sk-15_e.xml,waskesiu lake 
+http://weather.gc.ca/rss/city/sk-16_e.xml,maple creek 
+http://weather.gc.ca/rss/city/sk-17_e.xml,hudson bay 
+http://weather.gc.ca/rss/city/sk-18_e.xml,elbow 
+http://weather.gc.ca/rss/city/sk-19_e.xml,wynyard 
+http://weather.gc.ca/rss/city/sk-1_e.xml,rosthern 
+http://weather.gc.ca/rss/city/sk-20_e.xml,key lake 
+http://weather.gc.ca/rss/city/sk-21_e.xml,kindersley 
+http://weather.gc.ca/rss/city/sk-22_e.xml,meadow lake 
+http://weather.gc.ca/rss/city/sk-23_e.xml,rosetown 
+http://weather.gc.ca/rss/city/sk-24_e.xml,moose jaw 
+http://weather.gc.ca/rss/city/sk-25_e.xml,spiritwood 
+http://weather.gc.ca/rss/city/sk-26_e.xml,scott 
+http://weather.gc.ca/rss/city/sk-27_e.xml,prince albert 
+http://weather.gc.ca/rss/city/sk-28_e.xml,val marie 
+http://weather.gc.ca/rss/city/sk-29_e.xml,cypress hills (provincial park) 
+http://weather.gc.ca/rss/city/sk-2_e.xml,biggar 
+http://weather.gc.ca/rss/city/sk-30_e.xml,collins bay 
+http://weather.gc.ca/rss/city/sk-31_e.xml,weyburn 
+http://weather.gc.ca/rss/city/sk-32_e.xml,regina 
+http://weather.gc.ca/rss/city/sk-33_e.xml,yorkton 
+http://weather.gc.ca/rss/city/sk-34_e.xml,north battleford 
+http://weather.gc.ca/rss/city/sk-35_e.xml,last mountain lake (sanctuary) 
+http://weather.gc.ca/rss/city/sk-36_e.xml,stony rapids 
+http://weather.gc.ca/rss/city/sk-37_e.xml,outlook 
+http://weather.gc.ca/rss/city/sk-38_e.xml,la ronge 
+http://weather.gc.ca/rss/city/sk-39_e.xml,buffalo narrows 
+http://weather.gc.ca/rss/city/sk-3_e.xml,canora 
+http://weather.gc.ca/rss/city/sk-40_e.xml,saskatoon 
+http://weather.gc.ca/rss/city/sk-41_e.xml,swift current 
+http://weather.gc.ca/rss/city/sk-42_e.xml,coronach 
+http://weather.gc.ca/rss/city/sk-43_e.xml,indian head 
+http://weather.gc.ca/rss/city/sk-44_e.xml,uranium city 
+http://weather.gc.ca/rss/city/sk-45_e.xml,eastend 
+http://weather.gc.ca/rss/city/sk-46_e.xml,melfort 
+http://weather.gc.ca/rss/city/sk-47_e.xml,nipawin 
+http://weather.gc.ca/rss/city/sk-48_e.xml,broadview 
+http://weather.gc.ca/rss/city/sk-49_e.xml,watrous 
+http://weather.gc.ca/rss/city/sk-4_e.xml,carlyle 
+http://weather.gc.ca/rss/city/sk-50_e.xml,southend reindeer 
+http://weather.gc.ca/rss/city/sk-51_e.xml,assiniboia 
+http://weather.gc.ca/rss/city/sk-52_e.xml,leader 
+http://weather.gc.ca/rss/city/sk-53_e.xml,estevan 
+http://weather.gc.ca/rss/city/sk-54_e.xml,rockglen 
+http://weather.gc.ca/rss/city/sk-55_e.xml,pelican narrows 
+http://weather.gc.ca/rss/city/sk-56_e.xml,lloydminster 
+http://weather.gc.ca/rss/city/sk-5_e.xml,fort qu'appelle 
+http://weather.gc.ca/rss/city/sk-6_e.xml,humboldt 
+http://weather.gc.ca/rss/city/sk-7_e.xml,kamsack 
+http://weather.gc.ca/rss/city/sk-8_e.xml,melville 
+http://weather.gc.ca/rss/city/sk-9_e.xml,moosomin 
+http://weather.gc.ca/rss/city/yt-10_e.xml,mayo 
+http://weather.gc.ca/rss/city/yt-11_e.xml,old crow 
+http://weather.gc.ca/rss/city/yt-12_e.xml,faro 
+http://weather.gc.ca/rss/city/yt-13_e.xml,watson lake 
+http://weather.gc.ca/rss/city/yt-14_e.xml,teslin 
+http://weather.gc.ca/rss/city/yt-15_e.xml,beaver creek 
+http://weather.gc.ca/rss/city/yt-16_e.xml,whitehorse 
+http://weather.gc.ca/rss/city/yt-17_e.xml,carmacks 
+http://weather.gc.ca/rss/city/yt-1_e.xml,kluane lake 
+http://weather.gc.ca/rss/city/yt-2_e.xml,carcross 
+http://weather.gc.ca/rss/city/yt-3_e.xml,rancheria 
+http://weather.gc.ca/rss/city/yt-4_e.xml,dempster (highway) 
+http://weather.gc.ca/rss/city/yt-5_e.xml,haines junction 
+http://weather.gc.ca/rss/city/yt-6_e.xml,dawson 
+http://weather.gc.ca/rss/city/yt-7_e.xml,burwash landing 
+http://weather.gc.ca/rss/city/yt-8_e.xml,ross river 
+http://weather.gc.ca/rss/city/yt-9_e.xml,rock river 
