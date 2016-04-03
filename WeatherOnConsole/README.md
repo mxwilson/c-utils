@@ -12,12 +12,6 @@ woc -l \(list cities\)
 
 woc -d \[city name\] \(set default\)
 
-## Examples
-$./woc -l | grep otta
-ottawa (kanata - orleans)
-ottawa (richmond - metcalfe) 
-$./woc -d "ottawa (kanata - orleans)"
- 
 ## Files
 .wocdb - comma-separated database file read by woc. Run woc-util.sh to generate an up-to-date list. 		
 .wocdef - default city config file created after running woc -d \[city name\].
@@ -33,6 +27,15 @@ gcc woc.c -o woc -lcurl -lxml2 -lm -I/usr/include/libxml2
 
 ![alt text](img/screenshot.jpg "woc")
 
+## Examples
+$./woc -l | grep otta
+
+ottawa (kanata - orleans)
+
+ottawa (richmond - metcalfe) 
+
+$./woc -d "ottawa (kanata - orleans)"
+ 
 ## License
 
 Copyright 2015-16, Matthew Wilson. 
