@@ -1,5 +1,5 @@
-// <login-inotifyd.c>
-// v 0.1.3. Copyright 2015 Matthew Wilson. 
+// <login-inotifyd.c> - e-mail ssh login notifications using mailx and ssmtp
+// v 0.1.5. Copyright 2015-16, Matthew Wilson. 
 // License GPLv3+: GNU GPL version 3 or later: http://gnu.org/licenses/gpl.html
 // No warranty. Software provided as is.
 
@@ -16,22 +16,30 @@
 #include<sys/types.h>
 #include<signal.h>
 
-char* emailaddy="user@email.com"; // e-mail address for notifications
+char* emailaddy="yourname@email.com"; // e-mail address for notifications
 
 #define LOCK_FILE "/var/lock/login-inotifyd.lock" // lock file location
 #define PID_FILE "/var/run/login-inotifyd.pid" // pid file location
 #define EVENT_SIZE (sizeof(struct inotify_event))
 #define EVENT_BUF_LEN (1024*(EVENT_SIZE + 16))
-char* errlog="/var/log/login-inotifyd-err.log"; // program log file
+char* errlog="/var/log/login-inotifyd.log"; // program log file
 char* wtmplogfile="/var/log/wtmp"; // location of wtmp log file
 int ln=0;
 int cntrr;
 int onetime_cntrr;
-char* itemtoemail;
+char* itemtoemail; // body of e-mail text
+char* untoemail; // username of logged in user to e-mail
+
+// prototypes
+
+int inotify_function();
+int get_event(struct inotify_event *event);
+int logger(char* message);
+void signal_handler(int sig);
 
 // function to read wtmp log file
 
-logfilereader() {
+int logfilereader() {
 char* items[2048];
 struct utmp ii;
 time_t logintime_raw;
@@ -46,25 +54,27 @@ if (LOGfp == NULL) {
         exit(1);
 }
 
-while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
-        if (ii.ut_type == 7) {
-                // look for logins other than tty
-                TTYcheck = strstr(ii.ut_line, "tty");
+// check for type 7 (login) and not a tty login, and host is not tmux or an xterm
+// look for remote/ssh login. create buff to send in e-mail. and also untoemail to
+// pass just username in e-mail subject line
 
-                if (TTYcheck != ii.ut_line) {
-                        logintime_raw=ii.ut_time;
+while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
+	if (ii.ut_type == 7) {
+        	if ( (! strstr(ii.ut_line, "tty")) && (! strstr(ii.ut_host, "tmux")) && 
+			(! strstr(ii.ut_host, "localhost")) && (! strstr(ii.ut_host, ":0")) ) {
+			logintime_raw=ii.ut_time;
                         strcpy(tempbuf, ctime(&logintime_raw));
                         tempbuf[strlen(tempbuf) - 1] = '\0';
-
- 			if (strlen(ii.ut_host) > 4 )  {
-                        	snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
-                                items[ln]=malloc(strlen(buff) + 1);
-                                strcpy(items[ln], buff);
-				ln++;
-			}
+			snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
+                        items[ln]=malloc(strlen(buff) + 1);
+                        strcpy(items[ln], buff);
+			untoemail=malloc(strlen(ii.ut_user) + 1);
+			strcpy(untoemail, ii.ut_user);
+			ln++;
 		}
 	}
 }
+
 
 fclose(LOGfp);
 
@@ -86,7 +96,7 @@ else {
 
 // "main" portion of the program 
 
-inotify_function() {
+int inotify_function() {
 long length;
 int fd;
 int wd; // watch descriptor
@@ -131,7 +141,7 @@ while(1) {
 
 	while (ptr < buffer + length) {
 		event=(struct inotify_event *) ptr;
-		get_event(event);
+		get_event(event); // now call the event handler below
 		ptr += sizeof(struct inotify_event) + event->len;
 	}
 }
@@ -140,7 +150,7 @@ while(1) {
 
 // incoming event handler
 
-get_event(struct inotify_event *event) {
+int get_event(struct inotify_event *event) {
 
 char embuff[300];
 
@@ -151,11 +161,10 @@ if (event->len > 0) {
 		// then call log reader
 		logfilereader();		
 		
-		// login & logout produce similar event. capture only once
-		// with a one time counter. then call mailx
-
+		// login & logout produce similar event. capture only once with a one time counter. 
+		// then create an e-mail with subject and body and call mailx
 		if (onetime_cntrr != cntrr) {
-			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"login\" %s", itemtoemail, emailaddy);
+			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"user login: %s\" %s", itemtoemail, untoemail, emailaddy);
 			system(embuff);
 			logger(itemtoemail); // also write to log
 		}
@@ -167,7 +176,7 @@ if (event->len > 0) {
 
 // program log file function
 
-logger(char* message) {
+int logger(char* message) {
 char timebuf[33];
 time_t thetime;
 thetime = time(NULL);
@@ -183,7 +192,7 @@ fclose(errlogfp);
 // signal handler function. removes lock file on exit.
 
 int sig;
-void signal_handler(sig) {
+void signal_handler(int sig) {
 switch(sig) {
         case SIGHUP:
                 logger("Hangup signal. Program exit.");
@@ -210,7 +219,7 @@ switch(sig) {
 
 // forking function
 
-forker() {
+int forker() {
 
 int lfp;
 int pfp;
@@ -289,7 +298,7 @@ while(1) {
 
 }
 
-main(int argc, char* argv[]) {
+void main(int argc, char* argv[]) {
 
 if (access("/usr/sbin/ssmtp", F_OK) == -1) {
         logger("Error: ssmtp not installed at: /usr/sbin/ssmtp");
@@ -304,5 +313,4 @@ else {
 	// fork before calling main program
 	forker();
 }
-
 }

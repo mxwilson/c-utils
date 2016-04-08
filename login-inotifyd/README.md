@@ -1,8 +1,8 @@
-# login-inotifyd (0.1.3)
+# login-inotifyd (0.1.5)
 
 ## Synopsis
 
-Login-inotifyd - A daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. This utilizes the inotify API and e-mails notifications immediately without the need for a cron job. 
+login-inotifyd - A daemon that detects SSH logins and e-mails notifications using mailx and SSMPT. Root access is required. This utilizes the inotify API and e-mails notifications immediately without the need for a cron job. 
 
 Previous versions in the 'old' subfolder do not use inotify. 
 
@@ -26,7 +26,10 @@ Previous versions in the 'old' subfolder do not use inotify.
 	- $ update-rc.d login-inotifyd defaults
 	- $ service login-inotifyd start
 
+## Updates
+April 2016: Prevention of programs like xterm or tmux sending a notification; user name now in e-mail subject line; function prototypes added.
+
 ## License
-Copyright 2015 Matthew Wilson. 
+Copyright 2015-16 Matthew Wilson. 
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 No warranty. Software provided as is.
