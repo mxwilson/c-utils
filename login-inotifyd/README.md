@@ -28,7 +28,8 @@ Previous versions in the 'old' subfolder do not use inotify.
 
 ## Updates
 April 2016: 
--Now reading from /var/log/auth.log rather than /var/log/wtmp to allow notifications from SFTP logins.
+
+-Now reading from /var/log/auth.log rather than /var/log/wtmp to allow notifications of SFTP logins.
 
 
 -Prevention of programs like xterm or tmux sending a notification; user name now in e-mail subject line; function prototypes added.
