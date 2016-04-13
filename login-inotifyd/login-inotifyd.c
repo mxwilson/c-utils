@@ -1,5 +1,5 @@
-// <login-inotifyd.c> - e-mail ssh login notifications using mailx and ssmtp
-// v 0.1.5. Copyright 2015-16, Matthew Wilson. 
+// <login-inotifyd.c> - e-mail ssh and sftp login notifications using mailx and ssmtp
+// v 0.2. Copyright 2015-16, Matthew Wilson. 
 // License GPLv3+: GNU GPL version 3 or later: http://gnu.org/licenses/gpl.html
 // No warranty. Software provided as is.
 
@@ -10,25 +10,18 @@
 #include<sys/stat.h>
 #include<unistd.h>
 #include<time.h>
-#include<utmp.h>
 #include<fcntl.h>
 #include<signal.h>
 #include<sys/types.h>
-#include<signal.h>
 
 char* emailaddy="yourname@email.com"; // e-mail address for notifications
-
+char* proglog="/var/log/login-inotifyd.log"; // program log file
+char* logfile="/var/log/auth.log"; // location auth.log file
 #define LOCK_FILE "/var/lock/login-inotifyd.lock" // lock file location
 #define PID_FILE "/var/run/login-inotifyd.pid" // pid file location
 #define EVENT_SIZE (sizeof(struct inotify_event))
 #define EVENT_BUF_LEN (1024*(EVENT_SIZE + 16))
-char* errlog="/var/log/login-inotifyd.log"; // program log file
-char* wtmplogfile="/var/log/wtmp"; // location of wtmp log file
-int ln=0;
-int cntrr;
-int onetime_cntrr;
-char* itemtoemail; // body of e-mail text
-char* untoemail; // username of logged in user to e-mail
+char* msgitem[2]; // items to send in email
 
 // prototypes
 
@@ -37,61 +30,79 @@ int get_event(struct inotify_event *event);
 int logger(char* message);
 void signal_handler(int sig);
 
-// function to read wtmp log file
+// function to read auth.log file
 
 int logfilereader() {
-char* items[2048];
-struct utmp ii;
-time_t logintime_raw;
-char tempbuf[99];
-char* TTYcheck=NULL;
-char buff[999];
-FILE *LOGfp;
-LOGfp = fopen(wtmplogfile, "r");
 
-if (LOGfp == NULL) {
-        logger("Unable to open wtmp log file. Program exit.");
-        exit(1);
+FILE* f;
+char* lineitems[2000];
+char line[300];
+int x=0;
+int a;
+int linenum=0;
+
+char* parstime;
+char* parslogentry;
+char* logentrycopy;
+char* parsusr;
+char* ptr = NULL;
+char* ptr2 = NULL;
+
+f = fopen(logfile, "r");
+
+if (f == NULL) {
+	printf("unable to open file\n");
+	exit(1);
 }
 
-// check for type 7 (login) and not a tty login, and host is not tmux or an xterm
-// look for remote/ssh login. create buff to send in e-mail. and also untoemail to
-// pass just username in e-mail subject line
-
-while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
-	if (ii.ut_type == 7) {
-        	if ( (! strstr(ii.ut_line, "tty")) && (! strstr(ii.ut_host, "tmux")) && 
-			(! strstr(ii.ut_host, "localhost")) && (! strstr(ii.ut_host, ":0")) ) {
-			logintime_raw=ii.ut_time;
-                        strcpy(tempbuf, ctime(&logintime_raw));
-                        tempbuf[strlen(tempbuf) - 1] = '\0';
-			snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
-                        items[ln]=malloc(strlen(buff) + 1);
-                        strcpy(items[ln], buff);
-			untoemail=malloc(strlen(ii.ut_user) + 1);
-			strcpy(untoemail, ii.ut_user);
-			ln++;
-		}
-	}
+while (fgets(line, sizeof(line) - 1, f) != NULL) {
+	lineitems[x] = malloc(strlen(line) + 1);
+	strcpy(lineitems[x], line);
+	lineitems[x][strcspn(lineitems[x], "\n")] = 0;
+	x++;
 }
 
+// only grab the last line in the file and test
 
-fclose(LOGfp);
+linenum = (x-1);	
 
-// if no ssh logins in wtmp log upon startup, resume program
-if (ln == 0) {
+if (strstr(lineitems[linenum], "Accepted") != NULL) {
+	// get date and time malloc 15 chars + 1. copy @ posit. 0-15
+	parstime = malloc(15 + 1);
+	strncpy(parstime, lineitems[linenum] + 0, 15);
+
+	// tokenlize lineitems until reaching word "Accepted"
+	ptr = strtok(lineitems[linenum], ":");
+	ptr = strtok(NULL, ":");
+	ptr = strtok(NULL, ":");
+	ptr = strtok(NULL, ";"); // allows capture of localhost ssh login 
+	parslogentry = malloc(strlen(ptr) + 1);
+	// copy @ position 1 (due to leading space) until strlen
+	strncpy(parslogentry, ptr + 1, strlen(ptr));
+	
+	// make copy of logentry to tokenize again to get username
+	logentrycopy = malloc(strlen(parslogentry + 1));	
+	strcpy(logentrycopy, parslogentry);
+
+	ptr2 = strtok(logentrycopy, " ");
+	ptr2 = strtok(NULL, " ");
+	ptr2 = strtok(NULL, " ");
+	ptr2 = strtok(NULL, " ");
+	parsusr = malloc(strlen(ptr2) + 1);
+	strcpy(parsusr, ptr2);
+
+	// time, log entry, user to pass to email
+
+	msgitem[0] = parstime;
+	msgitem[1] = parslogentry;
+	msgitem[2] = parsusr;
+}
+	// if last line no match return to main function	
+else {
 	inotify_function();
 }
 
-// get most recent item in wtmp and assign to itemtoemail
-else {
-	cntrr=(ln - 1);
-	itemtoemail=malloc(strlen(items[cntrr]) + 1); 
-	strcpy(itemtoemail, items[cntrr]);
-	items[0] = '\0';
-	ln=0;
-}
-
+fclose(f);
 }
 
 // "main" portion of the program 
@@ -154,21 +165,19 @@ int get_event(struct inotify_event *event) {
 
 char embuff[300];
 
-if (event->len > 0) {
-	// check for event, specifically when wtmp file is modified
-	if (strcmp(event->name, "wtmp") == 0) {
+// check for event, specifically when auth.log file is modified
 
+if (event->len > 0) {
+	if (strcmp(event->name, "auth.log") == 0) {
 		// then call log reader
 		logfilereader();		
+		// then email
+		snprintf(embuff, sizeof embuff, "echo \"%s %s\" | mailx -s \"user login: %s\" %s", msgitem[0], msgitem[1], msgitem[2], emailaddy);
+		system(embuff);
 		
-		// login & logout produce similar event. capture only once with a one time counter. 
-		// then create an e-mail with subject and body and call mailx
-		if (onetime_cntrr != cntrr) {
-			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"user login: %s\" %s", itemtoemail, untoemail, emailaddy);
-			system(embuff);
-			logger(itemtoemail); // also write to log
-		}
-		onetime_cntrr=cntrr;
+		// also write to our log
+		logger(msgitem[1]); 
+		
 	}
 }
 
@@ -183,10 +192,18 @@ thetime = time(NULL);
 strcpy(timebuf, ctime(&thetime));
 timebuf[strlen(timebuf) - 1] = '\0';
 
-FILE* errlogfp;
-errlogfp=fopen(errlog, "a");
-fprintf(errlogfp, "%s: %s\n", timebuf, message);
-fclose(errlogfp);
+FILE* proglogfp;
+proglogfp=fopen(proglog, "a");
+
+if (proglogfp != NULL) {
+	fprintf(proglogfp, "%s: %s\n", timebuf, message);
+	fclose(proglogfp);
+}
+else {
+	printf("ERROR: Unable to write to program log: %s\n", proglog);
+	exit(1);
+}
+
 }
 
 // signal handler function. removes lock file on exit.
@@ -220,7 +237,6 @@ switch(sig) {
 // forking function
 
 int forker() {
-
 int lfp;
 int pfp;
 char str[10];
