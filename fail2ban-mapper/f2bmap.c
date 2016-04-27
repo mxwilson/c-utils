@@ -6,11 +6,11 @@
 #include<string.h>
 #include<fcntl.h>
 
-// Fail2banMapper - v.0.1.2 (c) Matthew Wilson. 2015. 
+// Fail2ban-Mapper - v.0.1.3 (c) Matthew Wilson. 2015-16. 
 // Plots a world map of IPs banned today by Fail2ban.
 // Requires: Curl (to access ipinfo.io for Whois) and a map marker image.
 // Update OUTPUTMAP variable to change location of saved map html files.
-// Uses OpenLayers js API in map html files.
+// Uses OpenLayers JS API in html map files, under BSD 2-Clause License, (c) OpenLayers Contributors.
 // License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 // No warranty. Software provided as is.
 
@@ -42,7 +42,7 @@ int Year = TI->tm_year+1900;
 int Month = TI->tm_mon+1;
 int Today = TI->tm_mday;
 int incyear, incmonth, incday;
-char OUTPUTMAP[25]; // name of html output files. f2bmap.yy.mm.dd.htm
+char OUTPUTMAP[25]; // name of html output files: f2bmap.yy.mm.dd.htm
 
 snprintf(OUTPUTMAP, sizeof OUTPUTMAP, "f2bmap.%d.%d.%d.htm", Year, Month, Today);
 
@@ -72,8 +72,8 @@ if (fp == NULL) {
 
 int x=0;
 
-while (fgets(line, sizeof (line)-1, fp) != NULL) {
-	unparLin[x]=malloc(strlen(line)+1);	
+while (fgets(line, sizeof (line) - 1, fp) != NULL) {
+	unparLin[x]=malloc(strlen(line) + 1);	
 	strcpy(unparLin[x], line);
 	unparLin[x][strcspn(unparLin[x], "\n")] = 0;
 	x++;
@@ -86,7 +86,7 @@ int cnt=0;
 
 // only keep lines that occur today and contain "Ban"
 
-for (a=0; a<x; a++) {
+for (a = 0; a < x; a++) {
 	sscanf(unparLin[a], "%s %*s %*s %*s %*s %s %s", inc_T, inc_S, inc_IP);
 	
 	// get the time from line
@@ -94,8 +94,7 @@ for (a=0; a<x; a++) {
 
 	// if the incoming day = Today, and inc_S = Ban, then list. 
 	// change line below to process all items: if strcmp(inc_S, kw) == 0) {
- 	
-	if ((incday==Today) && strcmp(inc_S, kw) == 0) {
+ 	if ((incday==Today) && strcmp(inc_S, kw) == 0) {
 		pars_T[cnt]=malloc(strlen(inc_T)+1);
 		strcpy(pars_T[cnt], inc_T);	
 		pars_IP[cnt]=malloc(strlen(inc_IP)+1);  
@@ -116,7 +115,7 @@ int b;
 
 char embuff[50];
 
-for (b=0; b<cnt; b++) {
+for (b = 0; b < cnt; b++) {
 	snprintf(embuff, sizeof embuff, "curl -s ipinfo.io/%s/loc", pars_IP[b]);
 
 	if ((Sfp = popen(embuff, "r")) == NULL) {
@@ -125,7 +124,7 @@ for (b=0; b<cnt; b++) {
 	}
 	// get the incoming location from whois
 	while (fgets(inc_LOC, sizeof inc_LOC, Sfp) != NULL) {
-		pars_LOC[b]=malloc(strlen(inc_LOC)+1);	
+		pars_LOC[b]=malloc(strlen(inc_LOC) + 1);	
 		strcpy(pars_LOC[b], inc_LOC);
 		pars_LOC[b][strcspn(pars_LOC[b], "\n")] = 0;
 	}
@@ -140,9 +139,9 @@ char llong[30];
 
 for (b=0; b<cnt; b++) {
 	sscanf(pars_LOC[b], "%[^','], %s", lat, llong); 
-	pars_LAT[b]=malloc(strlen(lat)+1);
+	pars_LAT[b]=malloc(strlen(lat) + 1);
 	strcpy(pars_LAT[b], lat);	
-	pars_LONG[b]=malloc(strlen(llong)+1);  
+	pars_LONG[b]=malloc(strlen(llong) + 1);  
 	strcpy(pars_LONG[b], llong);
 	printf("%d: %s %s\n", b, pars_LONG[b], pars_LAT[b]);
 }
@@ -180,7 +179,7 @@ printf("%s\n", OUTPUTMAP);
 
 // this is the top of the html file
 
-for (x=0; x<1; x++) {
+for (x = 0; x < 1; x++) {
 
 snprintf(top_page, sizeof top_page, "<html>\n<head>\n<title>FAIL2BAN LOG MAP - %s</title>\n</head>\n<body>\n<div id=\"mapdiv\"></div>\n<script src=\"http://www.openlayers.org/api/OpenLayers.js\">\n</script>\n<script>\nmap=new OpenLayers.Map(\"mapdiv\");\nmap.addLayer(new OpenLayers.Layer.OSM());\nepsg4326=new OpenLayers.Projection(\"EPSG:4326\");\nprojectTo=map.getProjectionObject();\nvar lonLat=new OpenLayers.LonLat( 0,0 ).transform(epsg4326, projectTo);\nvar zoom=0;\nmap.setCenter (lonLat, zoom);\nvar vectorLayer=new OpenLayers.Layer.Vector(\"Overlay\");\n", OUTPUTMAP);
 
@@ -189,7 +188,7 @@ snprintf(top_page, sizeof top_page, "<html>\n<head>\n<title>FAIL2BAN LOG MAP - %
 
 // fill in the lat and longs here
 
-for (x=0; x<cntr; x++) {
+for (x = 0; x < cntr; x++) {
 
 snprintf(dropin, sizeof dropin, "\nvar feature=new OpenLayers.Feature.Vector(\nnew OpenLayers.Geometry.Point(%s, %s).transform(epsg4326, projectTo),\n{description:\' %s \'},\n{externalGraphic: \'%s\', graphicHeight:25, graphicWidth:21, graphicXOffset:-12, graphicYOffset:-25}\n);\nvectorLayer.addFeatures(feature);\n", pars_LONGG[x], pars_LATT[x], pars_IPP[x], MARKERIMAGE);
 	
@@ -198,7 +197,7 @@ snprintf(dropin, sizeof dropin, "\nvar feature=new OpenLayers.Feature.Vector(\nn
 
 // fill in bottom lines of the html template
 
-for (x=0; x<1; x++) {
+for (x = 0; x < 1; x++) {
 
 snprintf(bottom_page, sizeof bottom_page, "\nvar controls={selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })};\nfunction createPopup(feature) {feature.popup=new OpenLayers.Popup.FramedCloud(\"pop\", feature.geometry.getBounds().getCenterLonLat(),null,\'<div class=\"markerContent\">\'+feature.attributes.description+\'</div>\',null,true,function() { controls[\'selector\'].unselectAll(); });\nmap.addPopup(feature.popup);}\nfunction destroyPopup(feature) {feature.popup.destroy();feature.popup=null;}\n\nmap.addControl(controls[\'selector\']);\ncontrols[\'selector\'].activate();\nmap.addLayer(vectorLayer);\n</script>\n</body>\n</html>");
 
