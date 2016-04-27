@@ -1,10 +1,10 @@
 [Unit]
 Description=SSH Login iNotify Daemon
-After=default.target
+After=network.target
 
 [Service]
-ExecStart=/usr/bin/login-inotifyd
 Type=forking
+ExecStart=/usr/bin/login-inotifyd
 PIDFile=/var/run/login-inotifyd.pid
 TimeoutStopSec=0
 
