@@ -18,7 +18,7 @@ case "$1" in
 	;;
 	stop)
 	echo "stopping login-inotifyd"
-	pkill login-inotifyd
+	pkill i3
 	;;
 *)
 	echo "usage: /etc/init.d/login-inotifyd {start|stop}"
