@@ -1,5 +1,5 @@
-// <login-inotifyd.c> - e-mail ssh login notifications using mailx and ssmtp
-// v 0.1.5. Copyright 2015-16, Matthew Wilson. 
+// <login-inotifyd.c> - e-mail ssh login notifications using mailx.
+// v 0.1.6. Copyright 2015-16, Matthew Wilson. 
 // License GPLv3+: GNU GPL version 3 or later: http://gnu.org/licenses/gpl.html
 // No warranty. Software provided as is.
 
@@ -300,13 +300,13 @@ while(1) {
 
 void main(int argc, char* argv[]) {
 
-if (access("/usr/sbin/ssmtp", F_OK) == -1) {
-        logger("Error: ssmtp not installed at: /usr/sbin/ssmtp");
+if (access("/usr/bin/mailx", F_OK) == -1) {
+        logger("Error: mailx not installed at: /usr/bin/mailx - Install GNU Mailutils.");
         exit(1);
 }
 
 if (argc != 1) {
-	printf("err\n");
+	printf("Error: must be run as a daemon.\n");
 }
 
 else {
