@@ -38,6 +38,7 @@ cd /usr/ports/net/curl
 make install
 
 Edit: /usr/local/include/libxml2/encoding.h
+
 Update line including iconv.h to:
 
 \#include \</usr/local/include/iconv.h\>  
