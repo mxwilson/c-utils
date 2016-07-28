@@ -27,7 +27,7 @@ gcc woc.c -o woc -lcurl -lxml2 -lm -I/usr/include/libxml2
 
 **OpenBSD 5.9:**
 
-Ports Collection must be installed first. libxml2 and curl arerequired.
+Ports Collection must be installed first. libxml2 and curl are required.
 
 cd /usr/ports/textproc/libxml
 
@@ -38,8 +38,9 @@ cd /usr/ports/net/curl
 make install
 
 Edit: /usr/local/include/libxml2/encoding.h
+
 Update line including iconv.h to:
-#include </usr/local/include/iconv.h>  
+\#include \</usr/local/include/iconv.h\>  
 
 To compile:
 gcc woc.c -o woc -L/usr/local/lib -lcurl -I/usr/local/include/ -lxml2 -lm -I/usr/local/include/libxml2
