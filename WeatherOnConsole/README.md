@@ -18,10 +18,27 @@ woc -d \[city name\] \(set default\)
 
 ## Requirements
 
+**Ubuntu Linux 15+:**
 libxml2, libxml2-dev, libcurl3 and libcurl3-dev are required.
 
 To compile:  
 gcc woc.c -o woc -lcurl -lxml2 -lm -I/usr/include/libxml2
+
+**OpenBSD 5.9:**
+Ports Collection must be installed first. libxml2 and curl arerequired.
+
+cd /usr/ports/textproc/libxml
+make install
+
+cd /usr/ports/net/curl
+make install
+
+Edit: /usr/local/include/libxml2/encoding.h
+Update line including iconv.h to:
+#include </usr/local/include/iconv.h>  
+
+To compile:
+gcc woc.c -o woc -L/usr/local/lib -lcurl -I/usr/local/include/ -lxml2 -lm -I/usr/local/include/libxml2
 
 ## Screenshot
 
