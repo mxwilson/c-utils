@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Utility for WeatherOnConsole (woc-util.sh) v 0.1
+#Utility for WeatherOnConsole (woc-util.sh) v 0.2
 
 #License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 #No warranty. Software provided as is. Copyright Matthew Wilson, 2016.
@@ -22,7 +22,7 @@ mkdir xml && cd xml
 
 # download all the files
 
-for provinces in on qc
+for provinces in qc on
 do
   for i in {1..180}
   do
@@ -70,7 +70,7 @@ mv ./.wocdbLC ./.wocdb
 
 # and remove all accented characters
 
-iconv -f utf8 -t ascii//TRANSLIT ./.wocdb > ./.wocDBAC &&
+sed -e 's/â/a/g;s/ô/o/g;s/à/a/g;s/é/e/g;s/ê/e/g;s/è/e/g;s/î/i/g' ./.wocdb > ./.wocDBAC &&
 mv ./.wocDBAC ./.wocdb
 
 # and finally remove the space after the comma
