@@ -1,4 +1,4 @@
-/* threatlevel 0.1 */
+/* threatlevel 0.2 */
 
 /*
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -24,17 +24,23 @@ libxml2, libxml2-dev, libcurl3, libcurl3-dev and ImageMagick are required.
 #include<libxml/tree.h>
 #include<libxml/xmlmemory.h>
 #include<time.h>
+#include<ctype.h>
 #include"tlheader.h" // includes colors and prototypes
 
-int i=0, d=0, c=0; // command line options
-int threatlevel=0;
-int leftover=0;
+static int TL1 = 0; // used if selecting individual threatlevels to parse/print/create image 
+static int TL2 = 0; // ie: $tl -s 1 3 4
+static int TL3 = 0;
+static int TL4 = 0;
+
+int i = 0, d = 0, c = 0, s = 0; // command line options
+int threatlevel = 0;
+int leftover = 0;
 
 char* savefile = "./thefile.xml"; // downloaded xml file to parse
 char* urltopass = "http://rss.naad-adna.pelmorex.com/"; // source of alerts
 char* imgsavedir = "./images/"; // location of saved images
-char* version = "0.1";
-int x=0, y=0, z=0; // count of each item read from xml file
+char* version = "0.2";
+int x = 0, y = 0, z = 0; // count of each item read from xml file
 char* theitems[5000]; // the items read
 char* theitems2[5000];
 char* theitems3[5000];
@@ -130,21 +136,19 @@ decider();
 // just print the items
 
 int actual_printer(int a, int cnt, int newcnt) {
+	if (newcnt != 0) {
+		printf("\n");
+	}
+	if (threatlevel == 1) 	
+		printf(ANSI_RED "Threat level: %d\n" ANSI_RESET, threatlevel);
+	else if (threatlevel == 2)
+		printf(ANSI_YELLOW "Threat level: %d\n" ANSI_RESET, threatlevel);
+	else if (threatlevel == 3)
+		printf(ANSI_GREEN "Threat level: %d\n" ANSI_RESET, threatlevel);
+	else if (threatlevel == 4)
+		printf(ANSI_BLUE "Threat level: %d\n" ANSI_RESET, threatlevel);
 
-if (newcnt != 0) {
-	printf("\n");
-}
-
-if (threatlevel == 1) 	
-	printf(ANSI_RED "Threat level: %d\n" ANSI_RESET, threatlevel);
-else if (threatlevel == 2)
-	printf(ANSI_YELLOW "Threat level: %d\n" ANSI_RESET, threatlevel);
-else if (threatlevel == 3)
-	printf(ANSI_GREEN "Threat level: %d\n" ANSI_RESET, threatlevel);
-else if (threatlevel == 4)
-	printf(ANSI_BLUE "Threat level: %d\n" ANSI_RESET, threatlevel);
-
-printf("%d: item %d: %s\n%s\n", newcnt, a, theitems[a], theitems2[a]);
+	printf("%d: item %d: %s\n%s\n", newcnt, a, theitems[a], theitems2[a]);
 }
 
 // decide the threatlevel of each item
@@ -170,11 +174,13 @@ for (a = 0; a < x; a++) {
 				if ( (strstr(theitems3[cnt+5], "Extreme") != NULL) || (strstr(theitems3[cnt+5], "Severe") != NULL) ) {
 					// call the printer or image maker
 					threatlevel = 1;
-					actual_printer(a, cnt, newcnt); 
-					if (i == 1) {
-						imgmaker(a);
+					if ( (s != 1) || ( (s == 1) && (TL1 == 1) ) ) {
+						actual_printer(a, cnt, newcnt); 
+						if (i == 1) {
+							imgmaker(a);
+						}
+						newcnt++; // the count of matching items
 					}
-				newcnt++; // the count of matching items
 				}
 			} 
 		}		
@@ -184,11 +190,13 @@ for (a = 0; a < x; a++) {
 				(strstr(theitems3[cnt+1], "Cancel") != NULL) ) { 
 				if (strstr(theitems3[cnt+5], "Moderate") != NULL) {
 					threatlevel = 2;
-					actual_printer(a, cnt, newcnt); 
-					if (i == 1) {
-						imgmaker(a);
+					if ( (s != 1) || ( (s == 1) && (TL2 == 1) ) ) {
+						actual_printer(a, cnt, newcnt); 
+						if (i == 1) {
+							imgmaker(a);
+						}
+						newcnt++; 
 					}
-					newcnt++; 
 				}
 			}	 
 		}
@@ -196,22 +204,26 @@ for (a = 0; a < x; a++) {
 		if ( (strstr(theitems3[cnt], "Actual") != NULL) || (strstr(theitems3[cnt], "Exercise") != NULL) ) { 
 				if (strstr(theitems3[cnt+5], "Minor") != NULL) {
 					threatlevel = 3;
-					actual_printer(a, cnt, newcnt); 
-					if (i == 1) {
-						imgmaker(a);
-					}
-					newcnt++; 
+					if ( (s != 1) || ( (s == 1) && (TL3 == 1) ) ) {
+						actual_printer(a, cnt, newcnt); 
+						if (i == 1) {
+							imgmaker(a);
+						}
+						newcnt++;
+					} 
 				}
 		} 
 	
 		if ( (strstr(theitems3[cnt], "Exercise") != NULL) || (strstr(theitems3[cnt], "System") != NULL) ||
 			(strstr(theitems3[cnt], "Test") != NULL) ) { 
 			threatlevel = 4;
-			actual_printer(a, cnt, newcnt); 
-			if (i == 1) {
-				imgmaker(a);
+			if ( (s != 1) || ( (s == 1) && (TL4 == 1) ) ) {
+				actual_printer(a, cnt, newcnt); 
+				if (i == 1) {
+					imgmaker(a);
+				}
+				newcnt++; 
 			}
-			newcnt++; 
 		}
 	cnt++;		
 	}
@@ -278,80 +290,120 @@ static struct option const long_options[] =
     	{"imagegenerate", no_argument, 0, 'i'}, 
 	{"help", no_argument, &flag_help, 1},
 	{"custom", no_argument, 0, 'c'},
+	{"select", no_argument, 0, 's'},
 	{"download", no_argument, 0, 'd'}, 
    	{0, 0, 0, 0}			
 };
 
 void usage() {
-printf("usage:\ntl (list alert items)\ntl -i (generate alert images)\ntl -d (download new xml file)\ntl -c (create custom image)\n");
-exit(1);
+	printf("usage:\ntl (list alert items)\ntl -s [1] [2] [3] [4] (select individual threat levels)\ntl -i (generate alert images)\ntl -d (download new xml file)\ntl -c (create custom image)\n");
+	if (flag_help) 
+		exit(EXIT_SUCCESS);
+	else
+		exit(EXIT_FAILURE);
 }
 
 int main (int argc, char* argv[]) {
-int optc;
-int index;
+	int optc;
+	int index;
 
-// test for imagemagick before starting
+	// test for imagemagick before starting
 
-if ((access("/usr/bin/convert", F_OK) == -1)) {
-	printf("imagemagick not installed\n");
-	exit(1);
-}
-
-while ((optc = getopt_long (argc, argv, "idc", long_options, (int *) 0)) != EOF) {
-	switch (optc) {
-		case 0:
-		  break; 
-		case 'i':
-	          i=1;
-		  break;
-		case 'd':
-		  d=1;
-		  break;
-		case 'c':
-		  c=1;
-		  break;
-	   	case '?':
-		  usage();
-		  break;
-	    	default:	
-		  usage();
-		  break;
-	}
-}
-
-if (flag_help) {
-	printf("threatlevel! version: %s\n", version);
-	usage();
-}
-
-if (argc == 1) {
-	thefunc(argc, argv);
-	
-}
-
-else if (argc > 1) {
-	for (index = optind; index < argc; index++) {
-		;
+	if ((access("/usr/bin/convert", F_OK) == -1)) {
+		printf("imagemagick not installed\n");
+		exit(EXIT_FAILURE);
 	}
 
-	argc -= optind;
-	argv += optind;
-	leftover=index-optind;
+	while ((optc = getopt_long (argc, argv, "idcs", long_options, (int *) 0)) != EOF) {
+		switch (optc) {
+			case 0:
+		  	    break; 
+			case 'i':
+	          	    i = 1;
+		  	    break;
+			case 'd':
+		  	    d = 1;
+		  	    break;
+			case 'c':
+		            c = 1;
+		  	    break;
+			case 's':
+		            s = 1;
+		  	    break;
+	   		case '?':
+		  	    usage();
+		  	    break;
+	    		default:	
+		  	    usage();
+		  	    break;
+		}
+	}
 
-	if ((leftover == 0) && (i == 1)) {
-		thefunc(argc, argv);
-	}
-	if ((leftover == 0) && (c == 1)) {
-		customimg();
-	}
-	if ((leftover == 0) && (i == 0) && (d == 1)) {
-		curl_func();
-		exit(0);	
-	}
-	else {
+	if (flag_help) {
+		printf("threatlevel! version: %s\n", version);
 		usage();
 	}
-}
+	if (argc == 1) {
+		thefunc(argc, argv);
+	
+	}
+	else if (argc > 1) {
+		for (index = optind; index < argc; index++) {
+			;
+		}
 
+		argc -= optind;
+		argv += optind;
+		leftover = index - optind;
+
+		// first check if we are only printing specific threatlevels
+	
+		if ( ((leftover > 0) && (s == 1)) && ((c == 0) && (d == 0)) ) {
+			if (argc > 4) {
+				printf("too many arguments\n");		
+				usage();	
+			}
+			
+			int qq;
+			int tester;
+			// check if specific entered threatlevel is indeed an INT
+			for (qq = 0; qq < argc; qq++) {
+				tester = atoi(argv[qq]);
+				
+				if ( (tester > 4) || (tester < 1) ) {
+					printf("Err. Numbers must be 1 - 4\n");
+					usage();
+				}
+				// if TLX set, then print that(s) rather than all threats
+				if (tester == 1) {
+					TL1 = 1;
+				}
+				if (tester == 2) {
+					TL2 = 1;
+				}
+				if (tester == 3) {
+					TL3 = 1;
+				}
+				if (tester == 4) {
+					TL4 = 1;
+				}
+			}
+		//printf("TL1: %d TL2: %d TL3: %d TL4:%d\n", TL1, TL2, TL3, TL4);
+		thefunc(argc, argv);
+		}	
+
+		if ((leftover == 0) && (i == 1)) {
+			thefunc(argc, argv);
+		}
+		if ((leftover == 0) && (c == 1) && (s == 0))  {
+			customimg();
+		}
+		if ((leftover == 0) && (i == 0) && (d == 1) && (s == 0)) {
+			curl_func();
+			exit(EXIT_SUCCESS);	
+		}
+		else {
+			usage();
+		}
+	}
 }
