@@ -1,4 +1,4 @@
-# threat level (tl) v 0.1
+# threat level (tl) v 0.2
 
 ## Synopsis
 
@@ -13,6 +13,8 @@ tl -i \(generate alert images\)
 tl -d \(download new xml file\)
 
 tl -c \(create custom image\)
+
+tl -s [1] [2] [3] [4] \(only use these individual levels\)
 
 ## Files
 ./thefile.xml - downloaded xml file for parsing.
