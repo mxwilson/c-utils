@@ -35,7 +35,6 @@ static int TL4 = 0;
 
 int t = 0, i = 0, d = 0, c = 0, s = 0; // command line options
 int threatlevel = 0;
-int leftover = 0;
 
 char* savefile = "./thefile.xml"; // downloaded xml file to parse
 char* urltopass = "http://rss.naad-adna.pelmorex.com/"; // source of alerts
@@ -83,7 +82,7 @@ void parseStory (xmlDocPtr doc, xmlNodePtr cur) {
 
 // parsedoc function calls parse story 
 
-void parseDoc() {
+int parseDoc(int argc) {
 	xmlDocPtr doc;
 	xmlNodePtr cur;
 
@@ -91,21 +90,21 @@ void parseDoc() {
 
 	if (doc == NULL) {
 		printf("parse file error\nlikely run 'tl -d' to download new xml file\n"); 
-		exit(EXIT_FAILURE);
+		return(1);
 	}
 
 	cur = xmlDocGetRootElement(doc);
 
 	if (cur == NULL) {
 		printf("empty document\n");
-		exit(EXIT_FAILURE);
+		return(1);
 	}
 	
 	// first check if root element of doc is correct
 	if (xmlStrcmp(cur->name, (const xmlChar *)"feed")) {
 		printf("doc of wrong type\n");
 		xmlFreeDoc(doc);
-		exit(EXIT_FAILURE);
+		return(1);
 	}
 
 	// then pick out each meta element you want, and parse
@@ -121,7 +120,11 @@ void parseDoc() {
 	xmlFreeDoc(doc);
 
 	// then call the decider to determine threat level
-	decider();
+	
+	if (decider() != 0) 
+		return(1);
+	else 
+		return(0);
 }
 
 // just print the items
@@ -130,7 +133,7 @@ int actual_printer(int a, int cnt, int newcnt) {
 	if (newcnt != 0) {
 		printf("\n");
 	}
-	if (threatlevel == 1) 	
+	if (threatlevel == 1) 
 		printf(ANSI_RED "Threat level: %d\n" ANSI_RESET, threatlevel);
 	else if (threatlevel == 2)
 		printf(ANSI_YELLOW "Threat level: %d\n" ANSI_RESET, threatlevel);
@@ -171,18 +174,16 @@ int actual_printer(int a, int cnt, int newcnt) {
 // decide the threatlevel of each item
 
 int decider() {
-int a;
-int bb=0;
-int cnt=0;
-int newcnt=0;
+	// inner loop to get at 9 attributes of the alert and determine threat level
+
+	/* 1 - red - actual0, alert1, update1, cancel1, extreme5, severe5, observed7, likely7, possible7
+	2 - yellow-  actual0, alert1, update1, cancel1, moderate5
+	3 - green - actual0, exercise0, minor5
+	4 - blue - exercise0, system0, test0 */
+
+	int a;
+	int bb = 0, cnt = 0, newcnt=0;
 	
-// inner loop to get at 9 attributes of the alert and determine threat level
-
-/* 1 - red - actual0, alert1, update1, cancel1, extreme5, severe5, observed7, likely7, possible7
-2 - yellow-  actual0, alert1, update1, cancel1, moderate5
-3 - green - actual0, exercise0, minor5
-4 - blue - exercise0, system0, test0 */
-
 for (a = 0; a < x; a++) {
 	for (bb = 0; bb < 9; bb++) {
 		if (strstr(theitems3[cnt], "Actual") != NULL) { 
@@ -266,12 +267,7 @@ for (a = 0; a < x; a++) {
 }	
 
 printf("x:%d y:%d z:%d matched:%d\n", x, y, z, newcnt);
-exit(0);
-}
-
-int thefunc(int argcc, char*argvv[]) {
-	// likely anything before parsing will go here
-	parseDoc();
+return(0);
 }
 
 // custom image function
@@ -375,70 +371,80 @@ int main (int argc, char* argv[]) {
 		  	    break;
 		}
 	}
-
 	if (flag_help) {
 		printf("threatlevel! version: %s\n", version);
 		usage();
 	}
 	if (argc == 1) {
-		thefunc(argc, argv);
-	
+		if (parseDoc(argc) != 0) 
+			exit(EXIT_FAILURE);
+		else
+			exit(EXIT_SUCCESS);	
 	}
 	else if (argc > 1) {
+		
 		for (index = optind; index < argc; index++) {
 			;
 		}
 
 		argc -= optind;
 		argv += optind;
-		leftover = index - optind;
-
-		// first check if we are only printing specific threatlevels
-	
-		if ( ((leftover > 0) && (s == 1)) && ((c == 0) && (d == 0)) ) {
-			if (argc > 4) {
-				printf("too many arguments\n");		
-				usage();	
-			}
-			
-			int qq;
-			int tester;
-			// check if specific entered threatlevel is indeed an INT
-			for (qq = 0; qq < argc; qq++) {
-				tester = atoi(argv[qq]);
-				
-				if ( (tester > 4) || (tester < 1) ) {
-					printf("Err. Numbers must be 1 - 4\n");
-					usage();
-				}
-				// if TLX set, then print that(s) rather than all threats
-				if (tester == 1) {
-					TL1 = 1;
-				}
-				if (tester == 2) {
-					TL2 = 1;
-				}
-				if (tester == 3) {
-					TL3 = 1;
-				}
-				if (tester == 4) {
-					TL4 = 1;
-				}
-			}
-		//printf("TL1: %d TL2: %d TL3: %d TL4:%d\n", TL1, TL2, TL3, TL4);
-		thefunc(argc, argv);
-		}	
-
-		if ((leftover == 0) && ((i == 1) || (t == 1))) {
-			thefunc(argc, argv);
-		}
-		if ((leftover == 0) && (c == 1) && (s == 0))  {
-			customimg();
-		}
-		if ((leftover == 0) && (i == 0) && (d == 1) && (s == 0)) {
+		
+		// -d: download xml
+		if ((argc == 0) && (d == 1) && (i == 0) && (s == 0) && (t == 0) && (c == 0)) {
 			curl_func();
+			exit(EXIT_SUCCESS);
+		}
+		// -s: check for specific threatlevel		
+		if ((s == 1) && ((c == 0) && (d == 0))) {
+			if (argc > 4 || argc == 0) { 
+				printf("arg problem.\n");
+				usage();
+			}
+			else {
+				int qq;
+				int tester;
+				// check if specific entered threatlevel is indeed an INT
+				for (qq = 0; qq < argc; qq++) {
+					tester = atoi(argv[qq]);
+				
+					if ( (tester > 4) || (tester < 1) ) {
+						printf("Err. Numbers must be 1 - 4\n");
+						usage();
+					}
+					// if TLX set, then print that(s) rather than all threats
+					if (tester == 1) {
+						TL1 = 1;
+					}
+					if (tester == 2) {
+						TL2 = 1;
+					}
+					if (tester == 3) {
+						TL3 = 1;
+					}
+					if (tester == 4) {
+						TL4 = 1;
+					}
+				}
+			if (parseDoc(argc) != 0)
+				exit(EXIT_FAILURE);
+			else
+				exit(EXIT_SUCCESS);
+			}	
+		}
+		// -c: custom image
+		if ((argc == 0) && (c == 1) && (i == 0) && (s == 0) && (d == 0) && (t == 0)) {	
+			customimg();
 			exit(EXIT_SUCCESS);	
 		}
+		// -i: generate images, or -t: tweet 
+		if ((argc == 0) && ((i == 1) || (t == 1) && (d != 1))) {
+			if (parseDoc(argc) != 0)
+				exit(EXIT_FAILURE);
+			else 
+				exit(EXIT_SUCCESS);
+			}
+
 		else {
 			usage();
 		}
