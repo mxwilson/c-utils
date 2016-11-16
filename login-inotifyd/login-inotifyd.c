@@ -1,5 +1,5 @@
 // <login-inotifyd.c> - e-mail ssh login notifications using mailx.
-// v 0.1.6. Copyright 2015-16, Matthew Wilson. 
+// v 0.1.7. Copyright 2015-16, Matthew Wilson. 
 // License GPLv3+: GNU GPL version 3 or later: http://gnu.org/licenses/gpl.html
 // No warranty. Software provided as is.
 
@@ -14,7 +14,6 @@
 #include<fcntl.h>
 #include<signal.h>
 #include<sys/types.h>
-#include<signal.h>
 
 char* emailaddy="yourname@email.com"; // e-mail address for notifications
 
@@ -24,7 +23,7 @@ char* emailaddy="yourname@email.com"; // e-mail address for notifications
 #define EVENT_BUF_LEN (1024*(EVENT_SIZE + 16))
 char* errlog="/var/log/login-inotifyd.log"; // program log file
 char* wtmplogfile="/var/log/wtmp"; // location of wtmp log file
-int ln=0;
+int ln = 0;
 int cntrr;
 int onetime_cntrr;
 char* itemtoemail; // body of e-mail text
@@ -40,277 +39,260 @@ void signal_handler(int sig);
 // function to read wtmp log file
 
 int logfilereader() {
-char* items[2048];
-struct utmp ii;
-time_t logintime_raw;
-char tempbuf[99];
-char* TTYcheck=NULL;
-char buff[999];
-FILE *LOGfp;
-LOGfp = fopen(wtmplogfile, "r");
+	char* items[2048];
+	struct utmp ii;
+	time_t logintime_raw;
+	char tempbuf[99];
+	char* TTYcheck=NULL;
+	char buff[999];
+	FILE *LOGfp;
 
-if (LOGfp == NULL) {
-        logger("Unable to open wtmp log file. Program exit.");
-        exit(1);
-}
+	LOGfp = fopen(wtmplogfile, "r");
 
-// check for type 7 (login) and not a tty login, and host is not tmux or an xterm
-// look for remote/ssh login. create buff to send in e-mail. and also untoemail to
-// pass just username in e-mail subject line
+	if (LOGfp == NULL) {
+        	logger("Unable to open wtmp log file. Program exit.");
+        	exit(EXIT_FAILURE);
+	}
 
-while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
-	if (ii.ut_type == 7) {
-        	if ( (! strstr(ii.ut_line, "tty")) && (! strstr(ii.ut_host, "tmux")) && 
-			(! strstr(ii.ut_host, "localhost")) && (! strstr(ii.ut_host, ":0")) ) {
-			logintime_raw=ii.ut_time;
-                        strcpy(tempbuf, ctime(&logintime_raw));
-                        tempbuf[strlen(tempbuf) - 1] = '\0';
-			snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
-                        items[ln]=malloc(strlen(buff) + 1);
-                        strcpy(items[ln], buff);
-			untoemail=malloc(strlen(ii.ut_user) + 1);
-			strcpy(untoemail, ii.ut_user);
-			ln++;
+	// check for type 7 (login) and not a tty login, and host is not tmux or an xterm
+	// look for remote/ssh login. create buff to send in e-mail. and also untoemail to
+	// pass just username in e-mail subject line
+
+	while (fread(&ii, sizeof ii, 1, LOGfp) != 0) {
+		if ((ii.ut_type == 7) && (ii.ut_user != NULL)) {
+        		if ( (! strstr(ii.ut_line, "tty")) && (! strstr(ii.ut_host, "tmux")) && 
+				(! strstr(ii.ut_host, "localhost")) && (! strstr(ii.ut_host, ":0")) ) {
+				logintime_raw = ii.ut_time;
+                        	strcpy(tempbuf, ctime(&logintime_raw));
+                        	tempbuf[strlen(tempbuf) - 1] = '\0';
+				snprintf(buff, sizeof buff, "%s %s %s %s", ii.ut_user, tempbuf, ii.ut_line, ii.ut_host);
+                        	items[ln] = malloc(strlen(buff) + 1);
+                        	strcpy(items[ln], buff);
+				untoemail = malloc(strlen(ii.ut_user) + 1);
+				strcpy(untoemail, ii.ut_user);
+				ln++;
+			}
 		}
 	}
-}
 
+	fclose(LOGfp);
 
-fclose(LOGfp);
-
-// if no ssh logins in wtmp log upon startup, resume program
-if (ln == 0) {
-	inotify_function();
-}
-
-// get most recent item in wtmp and assign to itemtoemail
-else {
-	cntrr=(ln - 1);
-	itemtoemail=malloc(strlen(items[cntrr]) + 1); 
-	strcpy(itemtoemail, items[cntrr]);
-	items[0] = '\0';
-	ln=0;
-}
-
+	// if no ssh logins in wtmp log upon startup, resume program
+	if (ln == 0) {
+		inotify_function();
+	}
+	// get most recent item in wtmp and assign to itemtoemail
+	else {
+		cntrr = (ln - 1);
+		itemtoemail = malloc(strlen(items[cntrr]) + 1); 
+		strcpy(itemtoemail, items[cntrr]);
+		items[0] = '\0';
+		ln = 0;
+	}
 }
 
 // "main" portion of the program 
-
 int inotify_function() {
-long length;
-int fd;
-int wd; // watch descriptor
-char* thefile;
-char* ptr;
-char buffer[EVENT_BUF_LEN];
-struct inotify_event *event;
+	long length;
+	int fd;
+	int wd; // watch descriptor
+	char* thefile;
+	char* ptr;
+	char buffer[EVENT_BUF_LEN];
+	struct inotify_event *event;
 
-// create instance of inotify
+	// create instance of inotify
+	fd = inotify_init();
 
-fd=inotify_init();
-
-// check for err
-
-if (fd < 0) {
-	logger("Inotify error.\n");
-	exit(1);
-}
-
-// watch descriptor - watch all modified items in /var/log
-
-wd = inotify_add_watch(fd, "/var/log", IN_MODIFY);
-
-// check for err
-
-if (wd < 0) {
-	logger("Error reading /var/log directory.\n");
-	exit(1);
-}
-
-// wait for change to occur
-
-while(1) {
-	length = read(fd, buffer, EVENT_BUF_LEN);
-	
-	if (length <= 0) {
-		logger("Error reading incoming events.\n");
-		exit(1);
+	if (fd < 0) {
+		logger("Inotify error. Program exit.");
+		exit(EXIT_FAILURE);
 	}
 	
-	ptr=buffer;
+	// watch descriptor - watch all modified items in /var/log
 
-	while (ptr < buffer + length) {
-		event=(struct inotify_event *) ptr;
-		get_event(event); // now call the event handler below
-		ptr += sizeof(struct inotify_event) + event->len;
+	wd = inotify_add_watch(fd, "/var/log", IN_MODIFY);
+
+	if (wd < 0) {
+		logger("Error reading /var/log directory. Program exit.");
+		exit(EXIT_FAILURE);
 	}
-}
 
+	// wait for change to occur
+	while(1) {
+		length = read(fd, buffer, EVENT_BUF_LEN);
+	
+		if (length <= 0) {
+			logger("Error reading incoming events. Program exit.");
+			exit(EXIT_FAILURE);
+		}
+	
+		ptr = buffer;
+
+		while (ptr < buffer + length) {
+			event = (struct inotify_event *) ptr;
+			get_event(event); // now call the event handler below
+			ptr += sizeof(struct inotify_event) + event->len;
+		}
+	}
 }
 
 // incoming event handler
 
 int get_event(struct inotify_event *event) {
-
-char embuff[300];
-
-if (event->len > 0) {
+	char embuff[300];
+	
 	// check for event, specifically when wtmp file is modified
-	if (strcmp(event->name, "wtmp") == 0) {
-
-		// then call log reader
-		logfilereader();		
-		
-		// login & logout produce similar event. capture only once with a one time counter. 
-		// then create an e-mail with subject and body and call mailx
-		if (onetime_cntrr != cntrr) {
-			snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"user login: %s\" %s", itemtoemail, untoemail, emailaddy);
-			system(embuff);
-			logger(itemtoemail); // also write to log
+	if (event->len > 0) {
+		if (strcmp(event->name, "wtmp") == 0) {
+			// then call log reader
+			logfilereader();		
+			// login & logout produce similar event. capture only once with a one time counter. 
+			// then create an e-mail with subject and body and call mailx
+			if (onetime_cntrr != cntrr) {
+				snprintf(embuff, sizeof embuff, "echo \"%s\" | mailx -s \"user login: %s\" %s", itemtoemail, untoemail, emailaddy);
+				system(embuff);
+				logger(itemtoemail); // also write to log
+			}
+			onetime_cntrr = cntrr;
 		}
-		onetime_cntrr=cntrr;
 	}
-}
-
 }
 
 // program log file function
 
 int logger(char* message) {
-char timebuf[33];
-time_t thetime;
-thetime = time(NULL);
-strcpy(timebuf, ctime(&thetime));
-timebuf[strlen(timebuf) - 1] = '\0';
+	char timebuf[33];
+	time_t thetime;
+	thetime = time(NULL);
+	strcpy(timebuf, ctime(&thetime));
+	timebuf[strlen(timebuf) - 1] = '\0';
 
-FILE* errlogfp;
-errlogfp=fopen(errlog, "a");
-fprintf(errlogfp, "%s: %s\n", timebuf, message);
-fclose(errlogfp);
+	FILE* errlogfp;
+	errlogfp = fopen(errlog, "a");
+
+	if (errlogfp == NULL) {
+		exit(EXIT_FAILURE);
+	}
+	
+	fprintf(errlogfp, "%s: %s\n", timebuf, message);
+	fclose(errlogfp);
 }
 
 // signal handler function. removes lock file on exit.
 
 int sig;
 void signal_handler(int sig) {
-switch(sig) {
-        case SIGHUP:
-                logger("Hangup signal. Program exit.");
-                if (access(LOCK_FILE, F_OK) == 0) {
+	switch(sig) {
+        	case SIGHUP:
+                    logger("Hangup signal. Program exit.");
+                    if (access(LOCK_FILE, F_OK) == 0) {
+                    	remove(LOCK_FILE);
+                    }
+		    if (access(PID_FILE, F_OK) == 0) {
+                    	remove(PID_FILE);
+                    }
+                    _exit(EXIT_SUCCESS);
+                case SIGTERM:
+                    logger("Terminate signal. Program exit.");
+                    if (access(LOCK_FILE, F_OK) == 0) {
                         remove(LOCK_FILE);
-                }
-		if (access(PID_FILE, F_OK) == 0) {
+                    }
+		    if (access(PID_FILE, F_OK) == 0) {
                         remove(PID_FILE);
-                }
-                exit(0);
-                break;
-        case SIGTERM:
-                logger("Terminate signal. Program exit.");
-                if (access(LOCK_FILE, F_OK) == 0) {
-                        remove(LOCK_FILE);
-                }
-		if (access(PID_FILE, F_OK) == 0) {
-                        remove(PID_FILE);
-                }
-                exit(0);
-                break;
-        }
+                    }
+                    _exit(EXIT_SUCCESS);
+	}
 }
 
 // forking function
 
 int forker() {
+	int lfp;
+	int pfp;
+	char str[10];
+	pid_t processid = 0;
+	pid_t sid = 0;
 
-int lfp;
-int pfp;
-char str[10];
-pid_t processid = 0;
-pid_t sid = 0;
+	processid = fork();
 
-processid=fork();
+	if (processid < 0) {
+        	logger("Fork error. Program exit.");
+        	exit(EXIT_FAILURE);
+	}
+	if (processid > 0) {
+        	exit(EXIT_SUCCESS);
+	}
 
-if (processid < 0) {
-        logger("Fork error. Program exit.");
-        exit(1);
-}
+	umask(0);
 
-if (processid > 0) {
-        exit(0);
-}
+	sid = setsid();
 
-umask(0);
+	if (sid < 0) {
+        	exit(EXIT_FAILURE);
+	}
 
-sid=setsid();
+	chdir("/");
 
-if (sid < 0) {
-        exit(1);
-}
+	// now check for lock file
 
-chdir("/");
+	lfp = open(LOCK_FILE, O_RDWR|O_CREAT|O_CLOEXEC, 0644);
 
-// now check for lock file
+	if (lfp < 0) {
+        	logger("Lock file error. Program exit.");
+        	exit(EXIT_FAILURE);
+	}
+	if (lockf(lfp, F_TLOCK, 0) < 0) {
+        	printf("Program already running.\n");
+        	exit(EXIT_FAILURE);
+	}
 
-lfp=open(LOCK_FILE, O_RDWR|O_CREAT|O_CLOEXEC, 0644);
+	// and pid file
 
-if (lfp < 0) {
-        logger("Lock file error. Program exit.");
-        exit(1);
-}
+	pfp = open(PID_FILE, O_RDWR|O_CREAT|O_CLOEXEC, 0644);
 
-if (lockf(lfp, F_TLOCK, 0) < 0) {
-        printf("Program already running.\n");
-        exit(0);
-}
+	if (pfp < 0) {
+        	logger("PID file error. Program exit.");
+        	exit(EXIT_FAILURE);
+	}
 
-// and pid file
+	// continue, write pid to lock file
 
-pfp=open(PID_FILE, O_RDWR|O_CREAT|O_CLOEXEC, 0644);
+	sprintf(str, "%d\n", getpid());
+	write(lfp, str, strlen(str));
+	write(pfp, str, strlen(str));
 
-if (pfp < 0) {
-        logger("PID file error. Program exit.");
-        exit(1);
-}
+	// close i/o
 
-// continue, write pid to lock file
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 
-sprintf(str, "%d\n", getpid());
-write(lfp, str, strlen(str));
-write(pfp, str, strlen(str));
+	// check for signals function
 
-// close i/o
+	signal(SIGHUP, signal_handler);
+	signal(SIGTERM, signal_handler);
 
-close(STDIN_FILENO);
-close(STDOUT_FILENO);
-close(STDERR_FILENO);
+	// now call main program
 
-// check for signals function
+	logger("Program start OK.");
 
-signal(SIGHUP, signal_handler);
-signal(SIGTERM, signal_handler);
-
-// now call main program
-
-logger("Program start OK.");
-
-while(1) {
-        inotify_function();
-}
-
+	while(1) {
+        	inotify_function();
+	}
 }
 
 void main(int argc, char* argv[]) {
-
-if (access("/usr/bin/mailx", F_OK) == -1) {
-        logger("Error: mailx not installed at: /usr/bin/mailx - Install GNU Mailutils.");
-        exit(1);
-}
-
-if (argc != 1) {
-	printf("Error: must be run as a daemon.\n");
-}
-
-else {
-	// fork before calling main program
-	forker();
-}
+	if (access("/usr/bin/mailx", F_OK) == -1) {
+        	logger("Error: mailx not installed at: /usr/bin/mailx - Install GNU Mailutils.");
+        	exit(EXIT_FAILURE);
+	}
+	if (argc != 1) {
+		printf("Error: must be run as a daemon.\n");
+		exit(EXIT_FAILURE);
+	}
+	else {
+		// fork before calling main program
+		forker();
+	}
 }

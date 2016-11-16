@@ -1,4 +1,4 @@
-# login-inotifyd (0.1.6)
+# login-inotifyd (0.1.7)
 
 ## Synopsis
 
@@ -17,7 +17,7 @@ Previous versions in the 'old' subfolder do not use inotify.
 	- place executable in location of your choice. ie: /usr/bin/login-inotifyd
 
 4. Update included /etc/login-inotifyd.service file and change ExecStart line to reflect location of executable.
-	- move service file to /etc/systemd/system/ and activate:
+	- move service file to /usr/lib/systemd/system/ and activate:
 	- $ systemctl enable login-inotifyd.service
 	- $ systemctl start login-inotifyd.service
 
@@ -28,9 +28,9 @@ Previous versions in the 'old' subfolder do not use inotify.
 	- $ service login-inotifyd start
 
 ## Updates
+Nov 2016: Code cleanup.
 July 2016: Program is now MTA agnostic.
 April 2016: Prevention of programs like xterm or tmux sending a notification; user name now in e-mail subject line; function prototypes added.
-* Briefly reverting back to ver 0.1.5 -- too many events in auth.log for inotify.
 
 ## License
 Copyright 2015-16 Matthew Wilson. 
