@@ -1,4 +1,4 @@
-# WeatherOnConsole (woc) v 0.3
+# WeatherOnConsole (woc) v 0.3.5
 
 ## Synopsis
 
