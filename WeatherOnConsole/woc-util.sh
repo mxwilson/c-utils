@@ -13,9 +13,9 @@ URL="http://weather.gc.ca/rss/city/"
 
 # delete old db file if exist
 
-if [ -e "./.wocdb" ] 
+if [ -e "./wocdb" ] 
 	then 
-	rm ./.wocdb
+	rm ./wocdb
 fi
 
 mkdir xml && cd xml
@@ -58,22 +58,22 @@ for i in *.xml
 do
   echo $URL$i,$(grep title $i | head -n 1) |
 	awk -F '[<>]' '{print $1 $3}' | 
-	awk -F '- Weather' '{print $1}' >> ../.wocdb
+	awk -F '- Weather' '{print $1}' >> ../wocdb
 done
 
 cd .. && rm -rf xml
 
 # convert all in file to lowercase
 
-dd if=./.wocdb of=./.wocdbLC conv=lcase &&
-mv ./.wocdbLC ./.wocdb
+dd if=./wocdb of=./wocdbLC conv=lcase &&
+mv ./wocdbLC ./wocdb
 
 # and remove all accented characters
 
-sed -e 's/â/a/g;s/ô/o/g;s/à/a/g;s/é/e/g;s/ê/e/g;s/è/e/g;s/î/i/g' ./.wocdb > ./.wocDBAC &&
-mv ./.wocDBAC ./.wocdb
+sed -e 's/â/a/g;s/ô/o/g;s/à/a/g;s/é/e/g;s/ê/e/g;s/è/e/g;s/î/i/g' ./wocdb > ./wocDBAC &&
+mv ./wocDBAC ./wocdb
 
 # and finally remove the space after the comma
 
-sed -e "s/, /,/g" ./.wocdb > ./.wocsed &&
-mv ./.wocsed ./.wocdb
+sed -e "s/, /,/g" ./wocdb > ./wocsed &&
+mv ./wocsed ./wocdb
