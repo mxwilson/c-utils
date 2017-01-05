@@ -1,0 +1,18 @@
+[FILES]
+/etc/woc/wocdb - System-wide city database file.
+
+~/.wocdef - Per-user default city file.
+
+[EXAMPLES]
+$ woc [no option] - Show default city weather conditions.
+
+$ woc -d "ottawa (kanata - orleans)".
+
+[AUTHOR]
+Matthew Wilson <http://github.com/mxwilson/>
+
+[COPYRIGHT]
+Copyright (c) Matthew Wilson, 2015-2017.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.

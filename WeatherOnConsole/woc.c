@@ -1,15 +1,18 @@
 /*
-WeatherOnConsole (woc) v 0.3.5
+WeatherOnConsole (woc) v 0.4
 Display the weather forecast of Canadian cities.
 
 libxml2, libxml2-dev, libcurl3 and libcurl3-dev are required to compile.
 
 TO COMPILE: 
+sudo make install 
+or:
 gcc woc.c -o woc -lcurl -lxml2 -lm -I/usr/include/libxml2
 
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-No warranty. Software provided as is.
-Copyright Matthew Wilson, 2015-16.
+Copyright (c) Matthew Wilson, 2015-2017.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
 */
 
 #include<stdio.h>
@@ -22,11 +25,15 @@ Copyright Matthew Wilson, 2015-16.
 #include<libxml/parser.h>
 #include<libxml/tree.h>
 #include<libxml/xmlmemory.h>
+#include<pwd.h>
 
-char* db_file = "./.wocdb"; // db file of cities
-char* conf_file = "./.wocdef"; // default city conf file
-char* savefile = "./thefile.xml"; // downloaded xml file
-char* version ="0.3.5";
+const char* version ="0.4";
+const char* program_name = "woc";
+char* db_file = "/etc/woc/wocdb"; // global location of db file
+char* conf_file_name = "/.wocdef"; // file name of default city file
+char* conf_file; // Final name of default city file: /home/username/.wocdef
+char* xmlsavefile_name = "/.woctemp.xml"; // downloaded xml file name
+char* xmlsavefile; // Final name of xml file: /home/username/.woctemp.xml
 
 int default_city();
 int parseDoc();
@@ -35,10 +42,12 @@ int set_default_city(char citytopass[20]);
 int curl_func(char citytopass[20], char urltopass[80]);
 void parseStory (xmlDocPtr doc, xmlNodePtr cur); 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE* stream); 
+int home_dir_cat();
 
+struct passwd *pw;
 int x = 0;
 char* theitems[100];
-int l = 0, d = 0;
+int l = 0, d = 0, v = 0;
 
 // function for saving a downloaded page
 
@@ -65,7 +74,7 @@ int curl_func(char citytopass[20], char urltopass[80]) {
 	curl_easy_setopt(thehandle, CURLOPT_URL, urltopass);
 
 	// download and save xml file
-	f = fopen(savefile, "wb");
+	f = fopen(xmlsavefile, "wb");
 
 	if (f == NULL) {
         	printf("xml savefile error :(\n");
@@ -104,9 +113,9 @@ void parseStory (xmlDocPtr doc, xmlNodePtr cur) {
 	while (cur != NULL) {
 	       	if ((!xmlStrcmp(cur->name, (const xmlChar *) "title"))) {
                 	key = xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
-                	theitems[x] = malloc(strlen(key) + 1);
-                	strcpy(theitems[x], key);
-                	xmlFree(key);
+                	theitems[x] = malloc(strlen((char *)key) + 1); // this char* cast is new to prevent compile error
+                	strcpy(theitems[x], (char *)key);                 	
+			xmlFree(key);
         	}
 		cur = cur->next;
 	}
@@ -120,7 +129,7 @@ int parseDoc() {
 	xmlNodePtr cur;
 
 	// point to the saved xml file
-	doc = xmlParseFile(savefile);
+	doc = xmlParseFile(xmlsavefile);
 
 	if (doc == NULL) {
         	printf("xml parse file error\n");
@@ -161,7 +170,7 @@ int parseDoc() {
 	}
 
 	// delete xml file after use and end program
-	remove(savefile);
+	remove(xmlsavefile);
 	return(0);
 }
 
@@ -242,7 +251,7 @@ int tester(char argvcity[40]) {
 		}
 	}
 	// otherwise no matching city/string
-	printf("no match. try woc -l for city list\n");
+	printf("no match. try %s -l for city list\n", program_name);
 	return(1);
 }
 
@@ -251,7 +260,7 @@ int tester(char argvcity[40]) {
 int set_default_city(char citytopass[20]) {
 	FILE *fp;
 
-	if ((fp = fopen(conf_file, "w")) == NULL) {
+	if ((fp = fopen(conf_file, "w+")) == NULL) {
 		printf("error writing default config file: %s\n", conf_file);
 		return(1);
 	}	
@@ -270,12 +279,11 @@ int default_city() {
 	int x = 0;
 	FILE *fp;
 	char incomingline[150];
-
-	// check if exist
+	
 	if (access(conf_file, F_OK) == -1) {
 		printf("default city config file not exist: %s\n", conf_file);
-		printf("run: woc -d [city name] to create ");
-		printf("or woc -l to list\n");
+		printf("run: %s -d [city name] to create ", program_name);
+		printf("or: %s -l to list\n", program_name);
 		return(1);
 	}
 	// if exist only read top line of file. perhaps multiple lines/cities later
@@ -304,19 +312,47 @@ static int flag_help;
 
 static struct option const long_options[] = 
 {
-	{"l", no_argument, 0, 'l'},
-	{"d", no_argument, 0, 'd'}, 
-    	{"help", no_argument, &flag_help, 1}, 
+	{"list", no_argument, 0, 'l'},
+	{"set-default", no_argument, 0, 'd'}, 
+    	{"version", no_argument, 0, 'v'}, 
+	{"help", no_argument, &flag_help, 1}, 
    	{0, 0, 0, 0}			
 };
 
 void usage() {
-	printf("usage: woc [city name]\nwoc -l (list cities)\n");
-	printf("woc -d [city name] (set default)\n");
+	printf("Usage: %s [city name] [OPTION] ...\n", program_name);
+	printf("Options:\n");
+	printf("\t-l, --list - List all cities in db.\n");
+	printf("\t-d, --set-default [city name] - Set the default city.\n");
+	printf("\t-v, --version - Display version information and exit.\n");
+	printf("\t--help - Display help message and exit.\n");
 	if (flag_help)
 		exit(EXIT_SUCCESS);
 	else
 		exit(EXIT_FAILURE);
+}
+
+
+// concat current users home dir on to the file names: conf_file and savefile
+
+int home_dir_cat() {
+	pw = getpwuid(getuid()); 
+
+	if (pw == NULL) {
+		printf("error: unable to get home dir for user\n");
+		return(1);
+	}
+	
+	conf_file = malloc(strlen(pw->pw_dir) + strlen(conf_file_name) + 1);
+	conf_file[0] = '\0';
+	strcat(conf_file, pw->pw_dir);
+	strcat(conf_file, conf_file_name);
+
+	xmlsavefile = malloc(strlen(pw->pw_dir) + strlen(xmlsavefile_name) + 1);
+	xmlsavefile[0] = '\0';
+	strcat(xmlsavefile, pw->pw_dir);
+	strcat(xmlsavefile, xmlsavefile_name);
+	return(0);
 }
 
 int main (int argc, char* argv[]) {
@@ -324,7 +360,11 @@ int main (int argc, char* argv[]) {
 	int index;
 	char argvcity[40];
 
-	while ((optc = getopt_long (argc, argv, "ld", long_options, (int *) 0)) != EOF) {
+	if (home_dir_cat() != 0) {
+		exit(EXIT_FAILURE);
+	}
+
+	while ((optc = getopt_long (argc, argv, "ldv", long_options, (int *) 0)) != EOF) {
 		switch (optc) {
 		    case 0:
 	  	    	break; 
@@ -333,6 +373,9 @@ int main (int argc, char* argv[]) {
 		  	break;
 		    case 'd':
 		  	d = 1;
+		  	break;
+		    case 'v':
+		  	v = 1;
 		  	break;
 	  	    case '?':
 	  	  	usage();
@@ -349,9 +392,13 @@ int main (int argc, char* argv[]) {
 
 	argc -= optind;
 	argv += optind;
-
+	
+	if (v == 1) {
+		printf("%s %s\n", program_name, version);
+		exit(EXIT_SUCCESS);
+	}
 	if (flag_help) {
-		printf("weatheronconsole! version: %s\n", version);
+		printf("weather on console! - Display the weather conditions of 800+ Canadian towns and cities.\n");
 		usage();
 	}
 	else if (argc == 0 && l != 1 && d != 1) {
@@ -379,7 +426,7 @@ int main (int argc, char* argv[]) {
 	
 		malloc(thesize + 1);
 		final = (char *) malloc(1 + sizeof(char*) * (thesize));
-		
+
 		// this is key for concating to prevent last space
 		for (cc = 0; cc < argc; cc++) {
 			strcat(final, argv[cc]);
@@ -389,8 +436,9 @@ int main (int argc, char* argv[]) {
 		}
 		// now send the string to see if match is found
 		strcpy(argvcity, final);
-		if (tester(argvcity) == 0)
+		if (tester(argvcity) == 0) {
 			exit(EXIT_SUCCESS);
+		}
 	}
 	else {
 		usage();
