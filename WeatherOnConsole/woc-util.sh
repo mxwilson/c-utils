@@ -9,7 +9,7 @@
 #provided by Environment Canada. It will populate the database used by
 #WeatherOnConsole. 
 
-URL="http://weather.gc.ca/rss/city/"
+URL="https://weather.gc.ca/rss/city/"
 
 # delete old db file if exist
 

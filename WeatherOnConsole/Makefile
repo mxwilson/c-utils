@@ -13,7 +13,7 @@ MANFILE = woc.1
 install-man: 
 	mkdir -p $(MAN1DIR)
 	cp $(MANSRCDIR)$(MANFILE) $(MAN1DIR)$(MANFILE) 
-	gzip $(MAN1DIR)$(MANFILE)
+	gzip -f $(MAN1DIR)$(MANFILE)
 	mandb -q
 
 install-bin:
