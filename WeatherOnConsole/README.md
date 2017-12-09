@@ -26,14 +26,17 @@ woc -d \[city name\] \(set default\)
 
 ## Requirements
 
-**Ubuntu Linux 15+:**
+**Ubuntu Linux 15-17**
 
-libxml2, libxml2-dev, libcurl3 and libcurl3-dev are required.
+libxml2, libxml2-dev, libcurl3 and libcurl3-dev are required. Alternatively you may install libcurl4-gnutls-dev.
 
 To compile:  
 $ sudo make install
 
 This will install woc to /usr/bin/woc, create /etc/woc/wocdb, and install man page.
+
+To uninstall:
+$ sudo make uninstall
 
 **OpenBSD 5.9:**
 
